@@ -1,0 +1,742 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<!-- ROBERT - PARA HABILITAR LA VISIBILIDAD MOVIL  -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>Universidad Privada de Tacna</title>
+	<link rel="shortcut icon" href="uptlogin/images/favicon.jpg" />
+
+
+	<link href="uptlogin/fontawesome/css/all.css" rel="stylesheet" type="text/css" />
+	<link href="uptlogin/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="uptlogin/css/office.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		#calculator {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			color: #FFFFFF;
+		}
+
+		/*#delete{
+				font-family:Verdana, Arial, Helvetica, sans-serif;
+				font-size:8px;
+			}*/
+		tr {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+		}
+
+		input {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 11px;
+		}
+
+		.link {
+			text-decoration: none;
+			color: #FFFFFF;
+		}
+	</style>
+
+	<!-- <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,700" rel="stylesheet"> -->
+	<!-- ROBERT - CSS PARA COLOCARLO EN UN ARCHIVO APARTE  -->
+	<link href="uptlogin/css/css-web.css" rel="stylesheet" type="text/css" />
+	<link href="uptlogin/css/intranet.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" href="uptlogin/css/sweetalert.css">
+
+
+	<link rel="stylesheet" href="uptlogin/css/jquery.tabs.css" type="text/css" media="print, projection, screen">
+	<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+	<!--[if lte IE 7]>
+		<link rel="stylesheet" href="uptlogin/css/jquery.tabs-ie.css" type="text/css" media="projection, screen">
+		<![endif]-->
+
+	<!-- ROBERT - CSS BOOTSTRAP PARA RESPONSIVE  -->
+	<link href="uptlogin/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="uptlogin/css/normalize.min.css" />
+
+
+	<!--[if lt IE 9]>
+			<script src="uptlogin/js/ie-html5shiv.min.js"></script>
+			<script src="uptlogin/js/ie-respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+	<div class="container-fluid" id="div_principal">
+
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6" id="login_cabecera">&nbsp;</div>
+			<div class="col-lg-3"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6" id="login_cabecera_logo">
+				<div class="row">
+					<div class="col-lg-12" align="right">
+
+						<nav class="navbar navbar-default" id="menu_superior">
+							<div class="container-fluid">
+								<div class="navbar-header">
+									<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-superior" aria-expanded="false">
+										<span class="sr-only">Toggle navigation</span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</button>
+								</div>
+
+								<div class="collapse navbar-collapse" id="navbar-collapse-superior">
+									<ul class="nav navbar-nav navbar-right">
+										<li><a href="http://www.upt.edu.pe/redirect.php?alias=home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a></li>
+										<li><a href="http://www.upt.edu.pe/redirect.php?alias=intranet"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Intranet</a></li>
+										<li><a href="http://correo.upt.pe/"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span> Office365</a></li>
+										<li><a href="http://www.upt.edu.pe/redirect.php?alias=correo"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Mail Upt</a></li>
+										<li><a href="http://www.upt.edu.pe/contens/home/campus.php"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span> Campus</a></li>
+										<li><a href="http://www.upt.edu.pe/contents/home/mapa.php"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Mapa</a></li>
+									</ul>
+								</div>
+							</div>
+						</nav>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12" id="logo" align="center">
+						<img src="uptlogin/images/logo_upt.png" width="100%">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6" id="login_titulo">
+				<span>INTRANET</span>
+			</div>
+			<div class="col-lg-3"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6" id="login_titulo_inferior">&nbsp;</div>
+			<div class="col-lg-3"></div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6" id="login_cuerpo">
+
+				<div class="row">
+
+					<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 pestanas_principal">
+						<a href="#" class="nav-tabs-dropdown btn btn-block btn-primary hidden-lg hidden-md hidden-sm" style="background-color: #0e1d56;">Tabs</a>
+						<ul class="nav nav-tabs nav-justified" id="tabs_cuerpo_login">
+							<!-- index2 -->
+							<li role="presentation" class="active"><a data-toggle="tab" href="#academico">Acad&eacute;mico</a></li>
+															<li role="presentation"><a href="http://upt.intranet">Administrativo</a></li>
+																<!-- index2_pto -->
+								<li role=" presentation"><a href="http://www.upt.edu.pe/redirect.php?alias=intranet3">Presupuesto</a></li>
+						</ul>
+						<div class="tab-content">
+
+							<div id="academico" class="tab-pane fade pestanas_independiente in active">
+
+								<div class="row">
+									<div class="col-lg-12">
+																												<div class="alert alert-info text-center" role="alert" style="margin-bottom: 3px;">
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<strong>Importante!</strong> Directorio para Matrícula 2025 - II 
+											<a style="margin-left: 12px;" href="/directorio-upt.php" target="_blank" class="btn btn-info alert-link">Ver Directorio</a>
+											<!-- <a style="margin-left: 12px;"  href="#" class="btn btn-info alert-link" data-toggle="modal" data-target="#myModalFrame">Ver Directorio</a> -->
+										</div>
+									
+										<div class="well well-sm forget_message" style="font-size: 12px; text-align: justify;">
+
+											<div class="row">
+												<div class="col-lg-12">
+													<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Para cualquier duda o consulta llamar o enviar un mensaje a:
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-4 text-center" style="padding: 10px;">
+													<strong style="color: #0e1d56;">Problemas Intranet</strong><br>
+													<i class="fas fa-home" style="font-size: 30px; padding: 10px;"></i><br>
+													Celular <i class="fab fa-whatsapp-square" style="font-size: 20px;"></i>: <strong>980804693 - 952341082 - 980803138</strong><br>
+													<!-- Videoconferencia <i class="fas fa-video" style="font-size: 15px;"></i>: <strong>980803233</strong> -->
+													<!-- Tel&eacute;fono <i class="fas fa-phone" style="font-size: 20px;"></i>: <strong>(052 427212)</strong><br> -->
+													<!-- Anexos: <strong>135</strong>, <strong>128</strong>, <strong>136</strong>, <strong>137</strong>, <strong>452</strong>, <strong>127</strong> <br> -->
+													<strong style="font-style: italic;">intranet@upt.pe</strong><br>
+													<!-- computo@upt.edu.pe -->
+												</div>
+												<div class="col-sm-4 text-center" style="padding: 10px;">
+													<strong style="color: #0e1d56;">Problemas Office 365</strong><br>
+													<i class="fab fa-windows" style="font-size: 30px; padding: 10px;"></i><br>
+													Celular <i class="fab fa-whatsapp-square" style="font-size: 20px;"></i>: <strong>952341081</strong><br>
+													<!-- <strong style="font-style: italic;">soporte365@upt.pe</strong><br> -->
+												</div>
+												<div class="col-sm-4 text-center" style="padding: 10px;">
+													<strong style="color: #0e1d56;">Problemas Google Meet</strong><br>
+													<!-- <i class="fas fa-graduation-cap" style="font-size: 30px; padding: 10px;"></i><br> -->
+													<i class="fab fa-google" style="font-size: 30px; padding: 10px;"></i><br>
+													Celular <i class="fab fa-whatsapp-square" style="font-size: 20px;"></i>: <strong>980803233</strong><br>
+													<!-- Videoconferencia <i class="fas fa-video" style="font-size: 15px;"></i>: <strong>980803233</strong> -->
+													<!-- <strong style="font-style: italic;">soporteuptvirtual@upt.pe</strong> -->
+													<strong style="font-style: italic;">soportegsuite@virtual.upt.pe</strong>
+												</div>
+																							</div>
+
+											<div class="row">
+												<div class="col-lg-12 text-center">
+													<strong>En Horario de 08:00 a 13:00 hrs. y de 14:00 a 17:00 hrs. de lunes a viernes </strong>
+												</div>
+											</div>
+
+										</div>
+
+
+										<!-- Button trigger modal -->
+										<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+												Launch demo modal
+											</button> -->
+
+										<!-- <div class="modal fade" id="myModalFrame" tabindex="-1" role="dialog" aria-labelledby="myModalFrameLabel">
+											<div class="modal-dialog modal-lg" role="document" style="width: 90%;">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<h4 class="modal-title" id="myModalFrameLabel">Directorio Telefónico</h4>
+													</div>
+													<div class="modal-body">
+													<iframe width="100%" height="100%" frameborder="0" scrolling="yes" 
+														src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQsqWp-wbk59ozejGNE4FE-qicCGRAaaG87wD_ovL4HDKsJ-XZ0dgc23myEhb9TQ/pubhtml?widget=false&amp;headers=false&amp;chrome=false"></iframe>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+													</div>
+												</div>
+											</div>
+										</div> -->
+
+										<style>
+											.clsTituloModalEscuela {
+												padding: 14px;
+												padding-bottom: 0px;
+												margin-top: 0px;
+												margin-bottom: 10px;
+											}
+
+											.clsTituloModalEscuela small{
+												font-weight: 700; 
+												color: #0e1d56
+											}
+										</style>
+
+										<!-- Modal -->
+										<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog modal-lg" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<h4 class="modal-title" id="myModalLabel">Directorio Telefónico</h4>
+													</div>
+													<div class="modal-body">
+
+														<div class="panel panel-default">
+															<!-- Default panel contents -->
+															<!-- <div class="panel-heading">Panel heading</div> -->
+															<!-- <div class="panel-body text-center">
+																<p align="center">
+																	Los <strong>alumnos irregulares</strong> para  <strong>matricularse llamarán</strong> de 9am a 12 m y 3pm a 5pm a la  <strong>escuela profesional</strong> que le corresponde
+																</p>
+															</div> -->
+
+															<!-- FADE -->
+															<h1 class="clsTituloModalEscuela"><small>FADE - Facultad de Derecho</small></h1>
+															<!-- </div> -->
+															<h style="margin: 10px;"r>
+															<table class="table">
+																<tbody>
+																	<tr>
+																		<td class="text-left">FADE - Secretario Academico</td>
+																		<td class="text-center">425</td>
+																		<td class="text-right">Lincoln Salas</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">FADE - Matriculas</td>
+																		<td class="text-center">500</td>
+																		<td class="text-right">Lincoln Salas</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">FADE - Matriculas</td>
+																		<td class="text-center">501</td>
+																		<td class="text-right">Lincoln Salas</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">FADE - Matriculas</td>
+																		<td class="text-center">502</td>
+																		<td class="text-right">Lincoln Salas</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">FADE - Matriculas</td>
+																		<td class="text-center">425</td>
+																		<td class="text-right">Lincoln Salas</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">FADE - Director de Escuela</td>
+																		<td class="text-center">424</td>
+																		<td class="text-right">Lincoln Salas</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<!-- FAING -->
+															<h1 class="clsTituloModalEscuela"><small>FAING</small></h1>
+															<h style="margin: 10px;"r>
+															<table class="table">
+																<tbody>
+																	<tr>
+																		<td class="text-left">Agroindustrial</td>
+																		<td class="text-right">952341032</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Ambiental</td>
+																		<td class="text-right">965642000</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Civil</td>
+																		<td class="text-right">952950633</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Electrónica</td>
+																		<td class="text-right">999886651</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Sistemas</td>
+																		<td class="text-right">952341059</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Industrial</td>
+																		<td class="text-right">992341967</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<!-- FAEDCOH -->
+															<h1 class="clsTituloModalEscuela"><small>FAEDCOH</small></h1>
+															<!-- </div> -->
+															<h style="margin: 10px;"r>
+															<table class="table">
+																<tbody>
+																	<tr>
+																		<td class="text-left">Educación</td>
+																		<td class="text-right">952341039</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Comunicación</td>
+																		<td class="text-right">997144451</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Psicología</td>
+																		<td class="text-right">952341113</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															
+
+															<!-- FACSA -->
+															<h1 class="clsTituloModalEscuela"><small>FACSA</small></h1>
+															<!-- </div> -->
+															<h style="margin: 10px;"r>
+															<table class="table">
+																<tbody>
+																	<tr>
+																		<td class="text-left">Medicina</td>
+																		<td class="text-right">952341041</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Odontología</td>
+																		<td class="text-right">952341042</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Tec. Médica</td>
+																		<td class="text-right">952341107</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<!-- FACEM -->
+															<h1 class="clsTituloModalEscuela"><small>FACEM</small></h1>
+															<!-- </div> -->
+															<h style="margin: 10px;"r>
+															<table class="table">
+																<tbody>
+																	<tr>
+																		<td class="text-left">Turismo</td>
+																		<td class="text-right">977392094</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Contabilidad</td>
+																		<td class="text-right">952341035</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Comercial</td>
+																		<td class="text-right">923285505</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Negocios</td>
+																		<td class="text-right">952639619</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Economía</td>
+																		<td class="text-right">952886522</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left"></td>
+																		<td class="text-right">971273346</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<!-- FAU -->
+															<h1 class="clsTituloModalEscuela"><small>FAU</small></h1>
+															<!-- </div> -->
+															<h style="margin: 10px;"r>
+															<table class="table">
+																<tbody>
+																	<tr>
+																		<td class="text-left">Arquitectura</td>
+																		<td class="text-right">952341023</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<!-- CAJAS / BANCOS -->
+															<h1 class="clsTituloModalEscuela"><small>CAJAS / BANCOS</small></h1>
+															<!-- </div> -->
+															<h class="clsTituloModalEscuela" style="margin: 10px;"r>
+															<table class="table">
+																<tbody>
+																	<tr>
+																		<td class="text-left">Contacto 1</td>
+																		<td class="text-right">952341137</td>
+																	</tr>
+																	<tr>
+																		<td class="text-left">Contacto 2</td>
+																		<td class="text-right">978762491</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<!-- BECAS Y SUBVENCIONES -->
+															<h1 class="clsTituloModalEscuela"><small> BECAS Y SUBVENCIONES</small></h1>
+															<!-- </div> -->
+															<h style="margin: 10px;"r>
+															<table class="table">
+																<tbody>
+																	<tr>
+																		<td class="text-left">Contacto 1</td>
+																		<td class="text-right">952673038</td>
+																	</tr>
+																</tbody>
+															</table>
+
+														</div>
+
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="row">
+																			<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12 hidden-sm hidden-xs">
+											
+											
+				<div class="row table_cuerpo_login_number">
+					
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('1');">4</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('2');">6</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('3');">0</button></div>
+
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('4');">9</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('5');">8</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('6');">1</button></div>
+
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('7');">5</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('8');">3</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('9');">7</button></div>
+
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('0');">2</button></div>
+					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number delete" id="delete">BORRAR</button></div>
+
+				</div>
+										</div>
+										<div class="col-lg-6 col-md-7 col-sm-10 col-sm-offset-1 col-xs-12">
+
+											<form class="form-horizontal" id="form_login" method="POST" action=login.php>
+												<div class="form-group">
+													<label for="t1" class="col-lg-4 col-md-3 col-sm-3 control-label label_login">C&Oacute;DIGO :</label>
+													<div class="col-lg-8 col-md-7 col-sm-8">
+														<input type="text" class="form-control input_text" id="t1" name="t1" autocomplete="off" maxlength="10" placeholder="C&oacute;digo">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="t2" class="col-lg-4 col-md-3 col-sm-3 control-label label_login">CONTRASE&Ntilde;A :</label>
+													<div class="col-lg-8 col-md-7 col-sm-8">
+														<input type="password" class="form-control input_text" autocomplete="off" name="t2" id="t2" maxlength="6" readonly="true" disabled>
+													</div>
+												</div>
+												<div class="col-sm-10 col-sm-offset-1 col-xs-12 hidden-lg hidden-md" style="padding-bottom:10px;">
+													
+											
+				<div class="row table_cuerpo_login_number">
+					
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('1');">4</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('2');">6</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('3');">0</button></div>
+
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('4');">9</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('5');">8</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('6');">1</button></div>
+
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('7');">5</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('8');">3</button></div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('9');">7</button></div>
+
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number" onclick="js:setChar('0');">2</button></div>
+					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 td_cuerpo_login_number"><button type="button" class="btn btn-default btn_cuerpo_login_number delete" id="delete">BORRAR</button></div>
+
+				</div>
+												</div>
+												<!-- <br> -->
+												<div class="form-group">
+													<label for="kamousagi" class="col-lg-4 col-md-3 col-sm-3 control-label label_login">IMAGEN : </label>
+													<div class="col-lg-8 col-md-7 col-sm-8">
+														<input type="text" class="form-control input_text" name="kamousagi" id="kamousagi" autocomplete="off" maxlength="5" placeholder="Imagen">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-lg-4 col-md-3 col-sm-3 control-label"></label>
+													<div class="col-lg-8 col-md-7 col-sm-8">
+														<div class="row">
+															<div class="col-lg-12">
+																<div id="td_cuerpo_imagen_aleatoria" align="center">
+																	<img src="imagen.php" />
+																</div>
+															</div>
+															<div class="col-lg-12"><span class="help-block" style="font-size: 0.8em; text-align: justify;">Ingrese el n&uacute;mero de la imagen para completar el acceso.</span></div>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-lg-2 col-md-1 hidden-sm control-label"></label>
+													<div class="col-lg-8 col-md-7 col-sm-8 col-sm-offset-2">
+														<button type="submit" id="Submit" name="Submit" class="btn btn-default btn_submit_login">Enviar</button>
+
+
+														<input name="redirectto" type="hidden" id="redirectto" value="" />
+													</div>
+												</div>
+											</form>
+
+										</div>
+																	</div>
+
+								<!-- MENSAJE DE OLVIDO DE CONTRASEÑA -->
+								<div class="row">
+										<div class="col-lg-12">
+
+											<div class="well well-sm forget_message">
+												<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+											  Si usted ha ingresado entre los años <strong>2008 - 2013</strong> y no puede ingresar a la Intranet, aquí le brindamos una alternativa. Pulse <a href="index4.php" target="_self" class="btn btn-default btn-xs">AQUÍ</a> y bríndenos sus datos para poder ayudarlo.
+											</div>
+
+										</div>
+									</div>
+								<!--FIN - MENSAJE DE OLVIDO DE CONTRASEÑA -->
+
+
+								<!-- MENSAJE MATRICULA WEB -->
+								<!-- <div class="row">
+										<div class="col-lg-12">
+
+											<div class="well well-sm forget_message" style="font-size: 12px; text-align: justify; line-height: 20px;">
+												<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+
+												Se comunica a los estudiantes que el <strong>Sistema de Matrícula Web</strong> estará habilitado para Matrícula Extemporánea para los estudiantes en condición de INVICTOS del Semestre 2019-I, el 12 y 13 de Agosto del presente año, inicia a las 09:00 a.m. hasta las 19:00 p.m. <br />
+												
+												(*) Las Facultades que están habilitadas son: FAING, FACSA, FAU, FADE, FAEDCOH, FACEM <br />
+												
+												(**) Los estudiantes que harán uso del sistema web, serán aquellos que su código comience con <strong>2000XXXXXX</strong> hacia adelante. <br />
+												
+												Para cualquier duda o consulta llamar a: <strong>Teléfono: 52 427212 Anexo 455 – 130 Cel.: 952341082 En Horario de 8:00 a 13:00 hrs. y de 17:00 a 20:00 hrs. </strong> 
+
+											</div>
+
+										</div>
+									</div> -->
+								<!--FIN - MENSAJE MATRICULA WEB -->
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<p class="enlace_interes" align="center">ENLACES DE INTERES</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 enlace_imagenes" align="center">
+						<a target="_blank" href="https://aula.upt.edu.pe/login/index.php"><img src="uptlogin/images/link_moodle.jpg" width="92" height="66" border="0"></a>
+						<a target="_blank" href="https://aula.upt.edu.pe/login/index.php"><img src="uptlogin/images/link_uptvirtual.jpg" width="90" height="66" border="0"></a>
+						<a href="http://www.upt.edu.pe/apk/NotificacionesUPT.apk" title="Notificaciones UPT"><img src="uptlogin/images/link_intranetapk.png" width="159" height="66" border="0"></a>
+						<a href="http://www.upt.edu.pe/apk/GPSAlumni.apk" title="ALUMNI UPT"><img src="uptlogin/images/gps_alumni.jpeg" width="159" height="66" border="0"></a>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-lg-3"></div>
+		</div>
+
+
+
+
+
+
+
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6" id="login_pie_superior">&nbsp;</div>
+			<div class="col-lg-3"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6" id="login_pie">
+				<p>Campus Capanique, Av. Jorge Basadre Grohmann s/n Pocollay - Tacna
+					<br />
+					Rectorado, Av. Bolognesi N&ordm; 1177 Tacna. Telef. 52 427212</p>
+			</div>
+			<div class="col-lg-3"></div>
+		</div>
+
+	</div>
+	<!-- ./ container-fluid -->
+
+
+
+
+
+</body>
+
+<!-- ROBERTO - JS BOOTSTRAP PARA RESPONSIVE  -->
+<script type="text/javascript" src="uptlogin/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="uptlogin/scripts/bootstrap.min.js"></script>
+
+<!-- ROBERTO - PARA NO HACER CONFLICTO CON EL JQUERY DE VERSION ANTERIOR -->
+<script>
+	// Put jQuery 1.10.2 into noConflict mode.
+	var $jq1 = jQuery.noConflict(true);
+</script>
+
+
+<script type="text/javascript" src="uptlogin/scripts/jquery.js"></script>
+<script type="text/javascript" src="uptlogin/scripts/jquery.rightclick.js"></script>
+<script type="text/javascript" src="uptlogin/scripts/authen_code.js"></script>
+<script type="text/javascript" src="uptlogin/scripts/home.js"></script>
+<script type="text/javascript" src="uptlogin/scripts/faculties.js"></script>
+<script type="text/javascript" src="uptlogin/scripts/validar.js"></script>
+<script type="text/javascript">
+	// ROBERTO - JS PARA EL COMBO RESPONSIVE DE LAS PESTAÑAS
+	$(document).ready(function() {
+		$jq1('.nav-tabs-dropdown').each(function(i, elm) {
+			$jq1(elm).text($jq1(elm).next('ul').find('li.active a').text());
+		});
+
+		$jq1('.nav-tabs-dropdown').on('click', function(e) {
+			e.preventDefault();
+			$jq1(e.target).toggleClass('open').next('ul').slideToggle();
+		});
+
+		$jq1('#tabs_cuerpo_login a[data-toggle="tab"]').on('click', function(e) {
+			e.preventDefault();
+			$jq1(e.target).closest('ul').hide().prev('a').removeClass('open').text($jq1(this).text());
+		});
+
+	});
+
+
+	$(document).keydown(function(e) {
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if (code == 116) {
+			e.preventDefault();
+			jConfirm('¿Deseas recargar la página?', 'Confirmación', function(r) {
+				if (r)
+					location.reload();
+			});
+		}
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+		$('body').noContext();
+	});
+</script>
+
+<script src="uptlogin/scripts/sweetalert.min.js"></script>
+
+<!-- <script src="uptlogin/scripts/jquery.history_remote.pack.js" type="text/javascript"></script> -->
+<script src="uptlogin/scripts/jquery.tabs.pack.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#container-4').tabs(2, {
+			fxSlide: true
+		});
+	});
+</script>
+
+<script src="uptlogin/scripts/fastclick.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+	function FncAbrir() {
+		Abrir_ventana('vbiblioteca.php');
+		Abrir_ventana_concurso('vconcurso.php');
+		//		window.parent.location = "biblioteca.php";
+	}
+
+	function Abrir_ventana(pagina) {
+		var opciones = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=404, height=544, top=85, left=320";
+		window.open(pagina, "", opciones);
+	}
+
+	function Abrir_ventana_concurso(pagina2) {
+		var opciones2 = "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=344, height=740, top=85, left=729";
+		window.open(pagina2, "", opciones2);
+	}
+</script>
+
+
+
+</html>

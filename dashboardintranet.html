@@ -1,0 +1,2258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="tree.css" />
+<script language="javascript" type="text/javascript" src="extras/js/jquery/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="uptlogin/scripts/jquery.rightclick.js"></script>
+<script language="javascript" type="text/javascript" src="extras/js/jquery.prettyPhoto/jquery.prettyPhoto.js"></script>
+<link rel="stylesheet" type="text/css" href="extras/js/jquery.prettyPhoto/prettyPhoto.css" />
+<script language="javascript" type="text/javascript">
+	$(document).ready(function(){
+		/*$('#vidBox').VideoPopUp({
+		 opener: "video-trigger",
+		 idvideo: "demo"
+		 });*/
+
+		$("a[rel^='prettyPhoto']").prettyPhoto();
+		$("#kamousagi").click();
+
+	});
+
+	function fncCopiarTextoDiv( divCopiado, strCampo = '', divMensajeCopiado = '')
+	{
+		// var codigoACopiar = document.getElementById(divCopiado);
+		// var seleccion = document.createRange();
+		// seleccion.selectNodeContents(codigoACopiar);
+		// window.getSelection().removeAllRanges();
+		// window.getSelection().addRange(seleccion);
+		// var res = document.execCommand('copy');
+		// window.getSelection().removeRange(seleccion);
+
+
+		var email = document.querySelector('#' + divCopiado);
+		var range = document.createRange();
+		range.selectNode(email);
+		window.getSelection().removeAllRanges();
+		window.getSelection().addRange(range);
+
+		try {
+			// intentar copiar el contenido seleccionado
+			var resultado = document.execCommand('copy');
+			// console.log(resultado ? 'Email copiado' : 'No se pudo copiar el email');
+			$("#" + divMensajeCopiado).hide();
+
+			$("#" + divMensajeCopiado).hide().delay(300).fadeIn('slow');
+			$("#" + divMensajeCopiado).html(resultado ? '<strong>'+strCampo+'</strong> copiado!' : 'No se pudo copiar el <strong>'+strCampo+'</strong>');
+			$("#" + divMensajeCopiado).delay(1500).fadeOut('slow');
+
+			// setTimeout(function(){
+			// 	$("#" + divMensajeCopiado).html(resultado ? 'Email copiado' : 'No se pudo copiar el email');
+			// 	$("#" + divMensajeCopiado).show();
+			// }, 4000);
+			window.getSelection().removeRange(range);
+
+		} catch(err) {
+			$("#" + divMensajeCopiado).hide();
+
+			$("#" + divMensajeCopiado).hide().delay(700).fadeIn('slow');
+			$("#" + divMensajeCopiado).html('ERROR al intentar copiar el <strong>'+strCampo+'</strong>');
+			$("#" + divMensajeCopiado).delay(1500).fadeOut('slow');
+
+			// console.log('ERROR al intentar copiar el email');
+		}
+
+		// eliminar el texto seleccionado
+		window.getSelection().removeAllRanges();
+		// cuando los navegadores lo soporten, habría
+		// que utilizar: removeRange(range)
+
+	}
+
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Net.UPT.edu.pe</title>
+<!-- <script type="text/javascript" src="jquery.fancybox-1.3.4/fancybox/jquery.min.js"></script> -->
+<!--
+	<script>
+		!window.jQuery && document.write('<script src="jquery.fancybox-1.3.4/jquery-1.4.3.min.js"><\/script>');
+	</script>
+	<script type="text/javascript" src="jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+-->
+	<script type="text/javascript" src="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="jquery.fancybox-1.3.4/videopopup.css" media="screen" />
+	<script src="jquery.fancybox-1.3.4/fancybox/videopopup.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			*   Examples - images
+			*/
+
+			$("a#example1").fancybox();
+
+			$("a#example2").fancybox({
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'elastic'
+			});
+
+			$("a#example3").fancybox({
+				'transitionIn'	: 'none',
+				'transitionOut'	: 'none'
+			});
+
+			$("a#example4").fancybox({
+				'opacity'		: true,
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'none'
+			});
+
+			$("a#example5").fancybox();
+
+			$("a#example6").fancybox({
+				'titlePosition'		: 'outside',
+				'overlayColor'		: '#000',
+				'overlayOpacity'	: 0.9
+			});
+
+			$("a#example7").fancybox({
+				'titlePosition'	: 'inside'
+			});
+
+			$("a#example8").fancybox({
+				'titlePosition'	: 'over'
+			});
+
+			$("a[rel=example_group]").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+				}
+			});
+
+			/*
+			*   Examples - various
+			*/
+
+			$("#various1").fancybox({
+				'titlePosition'		: 'inside',
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various2").fancybox();
+
+			$("#various3").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+			$("#various4").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various5").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various6").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various56").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+
+			$("#various99").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$('#vidBox').VideoPopUp({
+			  backgroundColor: "#000000"
+			});
+
+			$('#vidBox').VideoPopUp({
+			  pausevideo: true
+			});
+
+			$('#vidBox').VideoPopUp({
+			  maxweight: "640"
+			});
+
+		});
+	</script>
+
+<!-- <script type="text/javascript" src="extras/js/jquery.gritter/jquery.gritter.js"></script>
+<link rel="stylesheet" type="text/css" href="extras/js/jquery.gritter/jquery.gritter.css" /> -->
+<script type="text/javascript" src="uptlogin/scripts/pnotify.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="uptlogin/css/pnotify.custom.min.css" />
+<link rel="stylesheet" type="text/css" href="uptlogin/css/pnotify.custom.css" />
+
+<script type="text/javascript">
+ $(document).keydown(function(e){
+  var code = (e.keyCode ? e.keyCode : e.which);
+  if(code == 116) {
+   e.preventDefault();
+   jConfirm('¿Deseas recargar la página?', 'Confirmación', function(r) {
+       if(r)
+        location.reload();
+   });
+  }
+ });
+</script>
+<script type="text/javascript">
+$(function(){
+	$('body').noContext();
+});
+</script>
+
+<style>
+	#fancybox-outer, #fancybox-inner, #fancybox-skin {
+    /* background: none repeat scroll 0 0 rgba(0, 0, 0, 0); */
+    border-radius: 10px!important;
+}
+</style>
+
+<link rel="stylesheet" type="text/css" href="uptlogin/css/box.css" />
+</head>
+<body >
+
+<script type="text/javascript">
+
+//$('#add-regular').click(function(){
+$(document).ready(function(){
+
+
+	var mostrarNotificaciones = false;
+	if (window.outerWidth > 600)
+	{
+		mostrarNotificaciones = true;
+	}
+
+	new PNotify({
+		title: '<center>PREVENCIÓN DE HOSTIGAMIENTO SEXUAL</center>',
+		text: '<font size=2><p align="Justify">Guía de prevención de actos de hostigamiento sexual en la comunidad universitaria. </font><br><a href="documentos/2025-I/MINEDU_Boletin_Prevencion_hostigamiento_sexual_comunidad_universitaria.pdf" target="_blank">Ver Guía</a><br>',
+		addclass: 'custom',
+		delay: 75000,
+		buttons: {
+		sticker: false
+		}
+		});
+
+	if (mostrarNotificaciones){
+		
+		
+		new PNotify({
+			title: '<center>RESULTADO ELECCIONES ESTUDIANTILES DEL PERIODO 2025-2026</center>',
+			text: '<font size=2><p align="Justify">Consolidado de resultado del proceso de elecciones de estudiantes del periodo 2025-2026</font><br><a href="documentos/2025-I/CONSOLIDADO_RESULTADOS_ELECCIONES_ESTUDIANTES.pdf" target="_blank">Descargar</a>',
+			addclass: 'custom',
+			delay: 75000,
+			buttons: {
+				sticker: false
+				}
+		});
+
+		// new PNotify({
+		// 	title: '<center>PADRÓN ELECTORAL ESTUDIANTIL PERIODO 2025-2026</center>',
+		// 	text: '<font size=2><p align="Justify">Padrón electoral de estamento estudiantil para conformar los Órganos de Gobiernos del Periodo 2025-2026</font><br><a href="documentos/2025-I/PADRON_ESTUDIANTES.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+		// new PNotify({
+		// 	title: '<center>SORTEO DEFENSORIA UNIVERSITARIA</center>',
+		// 	text: '<a rel="prettyPhoto" href="https://forms.gle/JqXr3yvtZ2M7bCXg7" target="_blank"><p align="center"><img src="imagenes/2024-II/defensoria_2024-II.jpg" height="260" width="220"></p><br><a href="https://drive.google.com/file/d/1eiTjETC6elOfaHvd4qCVLsDBPGjkkh52/view?usp=sharing" target="_blank">Link de Guía</a><br><br><a href="https://forms.gle/JqXr3yvtZ2M7bCXg7" target="_blank">Link de Cuestionario</a>',			addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 	sticker: false
+		// 	}
+		// });
+				// new PNotify({
+		// 	title: '<center>RESULTADO ELECCIONES ESTUDIANTILES DEL PERIODO 2024-2025</center>',
+		// 	text: '<font size=2><p align="Justify">Consolidado de resultado del proceso de elecciones de estudiantes del periodo 2024-2025</font><br><a href="documentos/2024-I/CONSOLIDADO_RESULTADOS_ESTUDIANTES_2024_I.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 	}
+		// });
+		// new PNotify({
+		// 	title: '<center>V PROGRAMA DE PREINCUBACIÓN</center>',
+		// 	text: '<a rel="prettyPhoto" href="https://preincubacion.uptincuba.pe/" target="_blank"><p align="center"><img src="imagenes/2024-I/FLYER_PREINCUBACION.jpeg" height="260" width="220"></p><br><a href="https://preincubacion.uptincuba.pe/" target="_blank">Link de Inscripción</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 	sticker: false
+		// 	}
+		// });
+		// new PNotify({
+		// 	title: '<center>PADRÓN ELECTORAL ESTUDIANTIL PERIODO 2024-2025</center>',
+		// 	text: '<font size=2><p align="Justify">Padrón electoral de estamento estudiantil para conformar los Órganos de Gobiernos del Periodo 2024-2025</font><br><a href="documentos/2024-I/PADRON_ESTUDIANTES_2024-I.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+		
+		
+		// new PNotify({
+		// 	title: '<center>RESULTADO ELECCIONES ESTUDIANTILES DEL PERIODO 2023-2024</center>',
+		// 	text: '<font size=2><p align="Justify">Consolidado de resultado del proceso de elecciones de estudiantes del periodo 2023-2024</font><br><a href="documentos/2023-II/CONSOLIDADO_RESULTADOS_ELECCIONES_ESTUDIANTES_COMPLEMENTARIAS.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+
+		 
+		// new PNotify({
+		// 	title: '<center>PADRÓN ELECTORAL ESTUDIANTIL PERIODO 2023-2024</center>',
+		// 	text: '<font size=2><p align="Justify">Padrón electoral de estamento estudiantil para conformar los Órganos de Gobiernos del Periodo 2023-2024</font><br><a href="documentos/2023-II/PADRON_ESTUDIANTES_COMPLEMENTARIO.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+		
+				// new PNotify({
+		// 	title: '<center>LISTA DE CANDIDATOS DEL PROCESO DE ELECCIONES COMPLEMENTARIAS ESTUDIANTILES</center>',
+		// 	text: '<font size=2><p align="Justify">Lista de candidatos del proceso de elecciones complementarias estudiantiles Periodo 2023-2024</font><br><a href="documentos/2023-II/LISTAS_ INSCRITAS.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+		
+		
+		// new PNotify({
+		// 	title: '<center>RESULTADO ELECCIONES ESTUDIANTES DEL PERIODO 2023-2024</center>',
+		// 	text: '<font size=2><p align="Justify">Consolidado de resultado del proceso de elecciones de estudiantes del periodo 2023-2024</font><br><a href="documentos/2023-I/CONSOLIDADO_RESULTADOS_ESTUDIANTES.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+
+		// new PNotify({
+		// 	title: '<center>PADRÓN ELECTORAL ESTUDIANTIL PERIODO 2023-2024</center>',
+		// 	text: '<font size=2><p align="Justify">Padrón electoral de estamento estudiantil para conformar los Órganos de Gobiernos del Periodo 2023-2024</font><br><a href="documentos/2023-I/PADRON_ESTUDIANTES_2023-I.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+/*
+		$.gritter.add({
+			title: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+			text: '<br><img src="imagenes/dia_docente_univ.jpg" ></br>',
+			sticky: false,
+			time: 75000
+		});
+		*/
+	/*
+	$.gritter.add({
+		title: '<h3><center>PADRON ELECTORAL ESTUDIANTIL</center></h3>',
+		text: '<font size=2>ELECCIONES DEL ESTAMENTO ESTUDIANTIL PARA CONFORMAR LOS ORGANOS DE GOBIERNO. PERIODO 2014 - 2015 <br><BR>Para ver los Padrones clic en las respectivas Facultades:<br><a  href="https://net.upt.edu.pe/documentos/ciencias empresariales_publicar_21052015.pdf" target="_blank"><strong>Facultad de Ciencias Empresariales</strong></a>	<br><a  href="https://net.upt.edu.pe/documentos/derecho_publicar_21052015.pdf" target="_blank"><strong>Facultad de Derecho</strong></a>	<br><br> <strong>Comite Electoral 2014-2015</strong></font>',
+		image: 'imagenes/logupt.png',
+		sticky: false,
+		time: 75000
+	});
+	*/
+
+
+	// $.gritter.add({
+	// 	title: '<h3><center>COMUNICADO COMITE ELECTORAL</center></h3>',
+	// 	text: '<font size=2>Cronograma de Elecciones Complementarias del Estamento Docente y Estudiantil <br><BR>DOCENTE: <a  href="https://net.upt.edu.pe/documentos/CE_2017/DOCENTES.pdf" target="_blank"><strong>Ver PDF</strong></a>	<br>ALUMNOS: <a  href="https://net.upt.edu.pe/documentos/CE_2017/ESTUDIANTES.pdf" target="_blank"><strong>Ver PDF</strong></a></font>',
+	// 	image: 'imagenes/logupt.png',
+	// 	sticky: false,
+	// 	time: 75000
+	// });
+
+
+	// $.gritter.add({
+		// title: '<h3><center>COMUNICADO</center></h3>',
+		// text: '<font size=2>Se comunica a todos los estudiantes, que para mejorar el servicio de pago estudiantil, se ha aperturado un nuevo medio de pago a traves del <strong>Banco Scotiabank</strong>, el pago se actualiza en línea.<br><br> <strong>Comunica Oficina de Cómputo</strong></font>',
+		// image: 'imagenes/logupt.png',
+		// sticky: false,
+		// time: 75000
+	// });
+
+	// $.gritter.add({
+	// 	title: '<h3><center>Comunicado de Cobranzas</center></h3>',
+	// 	text: '<div align="center"><font size=2>Procesos de Elecciones Generales de Estudiantes y Graduados de la Universidad Privada de Tacna</font><a  href="https://net.upt.edu.pe/documentos/COMUNICADO_Cobranzas.pdf" target="_blank"><blink><font size="2" ><br>(Visualizar Comunicado) </font></blink></a></div>',
+	// 	sticky: false,
+	// 	time: 75000
+	// });
+
+	/*
+		$.gritter.add({
+		title: '<h3><center>UPT VIRTUAL</center></h3>',
+		text: '<div align="center"><font size=2>Curso: Herramienta TIC para Estudiantes.</font><a rel="prettyPhoto"  href="imagenes/AFICHE_DROPBOX_1.jpg" target="_blank"><font size="2" ><br> Mas Información </font></a> 	</div>',
+		sticky: false,
+		time: 75000
+	});
+	*/
+	/*$.gritter.add({
+		title: '&nbsp;<a href="#" style="font-size:13px;"><blink>COMUNICADO OFICINA DE COMPUTO</a></blink>',
+		text: '<br><img src="imagenes/KIS-2014.png" ><br><br>&nbsp;&nbsp;&nbsp;<a  href="https://net.upt.edu.pe/imagenes/130711_curso_basico_Aulas_virtuales_docentes-2013-II.png"></a>',
+		sticky: false,
+		time:75000
+	});*/
+
+
+	/*$.gritter.add({
+		// (string | mandatory) the heading of the notification
+		title: 'AVISO',
+		// (string | mandatory) the text inside the notification
+		text: 'Todos los estudiantes que hayan realizado el pago de sus pensiones, en los distintos bancos autorizados, deberán acercarse a caja de Capanique para hacer el canje de sus voucher por la boleta correspondiente. Se considerara todos los pagos realizados en el banco a partir del 01 de Enero del 2012 hasta la fecha.',
+		// (string | optional) the image to display on the left
+		// image: 'http://a0.twimg.com/profile_images/59268975/jquery_avatar_bigger.png',
+		image: 'imagenes/logupt.png',
+		// (bool | optional) if you want it to fade out on its own or just sit there
+		sticky: false,
+		// (int | optional) the time you want it to be alive for before fading out
+		// time: ''
+		time: 75000
+	});
+			$.gritter.add({
+			title: '<h3><center>AVISO</center></h3>',
+			text: '<font size=2><p>Para información de Padrones Electorales sobre "Elecciones 2014 - 2015", se encuentran en el menú de la izquierda. En la parte de Anuncios. </p> </font><br> <strong>Comunica Oficina de Cómputo</strong><br>',
+			image: 'imagenes/logupt.png',
+			sticky: false,
+			time: 75000
+		});*/
+
+	/*$.gritter.add({
+		title: '&nbsp;<a href="#" style="font-size:13px;"><blink>Adquiera el Antivirus ESET Original</a></blink>',
+		text: '<a rel="prettyPhoto"  href="imagenes/ant2.jpg" target="_blank"><font size="2" ><img src="imagenes/ant2.jpg" height=180px width=280px><br>',
+		sticky: false,
+		time:75000
+	});
+
+	$.gritter.add({
+		title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>CRONOGRAMA DE ELECCIONES GENERALES DE ESTUDIANTES</center></a></blink>',
+		text: '<a rel="prettyPhoto" href="imagenes/elecciones_2015-2016.jpg" target="_blank"><font size="2"><img src="imagenes/elecciones_2015-2016.jpg" height=180px width=280px></font><br><strong>Comite Electoral 2015-2016</strong>',
+		sticky: false,
+		time:75000
+	});	*/
+/*$.gritter.add({
+		title: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+		text: '<a rel="prettyPhoto"  href="imagenes/gpad.jpg" target="_blank"><font size="2" ><img src="imagenes/gpad.jpg" height=150px width=280px><br>',
+		sticky: false,
+		time:75000
+	});	*/
+		/*$.gritter.add({
+			title: '<h3><center>COMUNICADO</center></h3>',
+			text: '<font size=2 ><p align="Justify">La Oficina de Tecnologías de la información comunica a los estudiantes de FAING, FAEDCOH; FADE y FAU que .<br><font size=1><p align="right">Área de Gestión del Potencial Humano</strong><br><a rel="prettyPhoto" href="documentos/MANUAL _MATRICULAWEB.pdf" target="_blank">Descargue MAnual del Sistema de Matrículas Web<br>',
+			 sticky: false,
+			time: 75000
+		 });*/
+/*$.gritter.add({
+			title: '<h3><center>AVISO</center></h3>',
+
+			text: '<font size=2 ><p align="Justify">La Oficina de Tecnologías de la información comunica a los estudiantes de FAING, FAEDCOH, FADE y FAU que una de las opciones para el proceso de matrículas del semestre académico 2017-I es utilizar el "Sistema de Matrículas Web".<br><font size=1><p align="right">Oficina de Tecnologías de la información</strong><br><a rel="prettyPhoto" href="documentos/MANUAL _MATRICULA__WEB.pdf" target="_blank">Descargue <br>Manual del SISTEMA DE MATRÍCULAS WEB<br>',
+			 sticky: false,
+			time: 75000
+		 });*/
+
+// $.gritter.add({
+// 			title: '<h3><center>MANUAL DE MATRÍCULA WEB</center></h3>',
+// 			 text: '<font size=2 ><p align="Justify">Manual de usuario del sistema de Matr\u00edcula Web</strong><br><a rel="prettyPhoto" href="documentos/Manuales/ManualMatriculaWebV2.pdf" target="_blank">Descargue<br><a rel="prettyPhoto" href="documentos/videotutorial_MatriculaWeb.mp4" target="_blank">Ver Video<br>',
+// 			 sticky: false,
+// 			time: 75000
+// 		 });
+/*$.gritter.add({
+			title: '<h3><center>AVISO</center></h3>',
+
+			text: '<font size=2 ><p align="Justify">La Oficina de Tecnologías de la información comunica a los estudiantes de FAING, FAEDCOH, FADE y FAU que una de las opciones para el proceso de matrículas del semestre académico 2017-I es utilizar el "Sistema de Matrículas Web".<br><font size=2><p align="right"></strong><br><a rel="prettyPhoto" href="documentos/videotutorial_MatriculaWeb.mp4" target="_blank">VER VIDEO TUTORIAL<br><a rel="prettyPhoto" href="documentos/MANUAL _MATRICULA__WEB.pdf" target="_blank">Descargue <br>Manual del SISTEMA DE MATRÍCULAS WEB<br><a rel="prettyPhoto" href="documentos/M_TEIN_SOLICITUDWEB_UPT.pdf" target="_blank">Manual de SOLICITUD WEB<br>',
+
+			 sticky: false,
+			time: 75000
+		 });*/
+
+
+		// new PNotify({
+	 //    title: '<center>AFICHE</center>',
+	 //    text: '<font size=2><p align="Justify">Segunda Especialidad en Administración</font><br><a href="imagenes/AFICHE_2ESP-ADMINISTRACION.jpg" target="_blank">Descargar</a><br>',
+	 //    addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+
+		// new PNotify({
+	 //    title: '<center>DIRECTIVA DE MORAS</center>',
+	 //    text: '<font size=2><p align="Justify">Directiva de Cobranza de Mora por Derechos de Enseñanza</font><br><a href="documentos/Reglamentos_Directivas/DIRECTIVA_2019_NUEVA_TASA_MORA.pdf" target="_blank">Descargar</a><br>',
+	 //    addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+		// new PNotify({
+	 //    title: '<center>DIRECTIVA DE COBRANZAS</center>',
+	 //    text: '<font size=2><p align="Justify">Directiva de Gestión de Pagos por Derechos de Enseñanza en Pregrado</font><br><a href="documentos/Reglamentos_Directivas/DIRECTIVA_2019_COBRANZAS.pdf" target="_blank">Descargar</a><br>',
+	 //    addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+		// ESTE ESSS ---------------------------------------------
+		// COMENTADO 25/03/2020 (importante) -- 28/09/2020
+		// --------------------------------------
+
+		// new PNotify({
+		// 	title: '<center>FUERZA UPT</center>',
+		// 	text: '<a rel="prettyPhoto" href="imagenes/2022-I/ELECCIONES_LISTA_FUERZA_UPT.jpg" target="_blank"><p align="center"><img src="imagenes/2022-I/ELECCIONES_LISTA_FUERZA_UPT.jpg" height="260" width="220"><br>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 	sticker: false
+		// 	}
+		// });
+
+		// new PNotify({
+		// 	title: '<center>RESULTADO ELECCIONES ESTUDIANTES DEL PERIODO 2022-2023</center>',
+		// 	text: '<font size=2><p align="Justify">Consolidado de resultado del proceso de elecciones de estudiantes del periodo 2022-2023</font><br><a href="documentos/2022-I/CONSOLIDADO_RESULTADOS_ELECCIONES_ESTUDIANTILES.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+
+		// new PNotify({
+		// 	title: '<center>RESULTADO ELECCIONES COMPLEMENTARIAS ESTUDIANTILES COFA FACSA PERIODO 2022-2023</center>',
+		// 	text: '<font size=2><p align="Justify">Resultado del proceso electoral de estamento estudiantil para Consejo de Facultad de FACSA 2022-2023</font><br><a href="documentos/2022-II/CONSOLIDADO_RESULTADOS_ELECCIONES_ESTUDIANTILES_FACSA_2022_II.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+		// new PNotify({
+		// 	title: '<center>PADRÓN ELECTORAL ESTUDIANTIL COFA FACSA PERIODO 2022-2023</center>',
+		// 	text: '<font size=2><p align="Justify">Padrón electoral de estamento estudiantil para Consejo de Facultad de FACSA 2022-2023</font><br><a href="documentos/2022-II/PADRON_ESTUDIANTES_FACSA_2022_II.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+
+				// new PNotify({
+		// 	title: '<center>SEMINARIO PARA DOCENTES</center>',
+		// 		text: '<font size=2 ><p align="Justify">Actividades de enseñanza y procesos de aprendizaje en un currículo orientado a competencias. <br> <ul><li> <a  href="https://docs.google.com/forms/d/e/1FAIpQLSfuNMZ4V2mhwVNDebe_sfFQBha8gCkiIerMpV6NA_ahXNNSaA/viewform" target="_blank"><blink><font size="1" >ENLACE DE INSCRIPCION </font></blink></a>    </li></ul>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+		
+		// new PNotify({
+		// 	title: '<center>VIDEO TUTORIAL DEL SISTEMA DE ELECCIONES</center>',
+		// 	text: '<a href="https://uptpe-my.sharepoint.com/:v:/g/personal/comiteelectoral_upt_pe/EZm7BEwWjiJLvHFG4tmbqpQBXSgbwxONseu1USMl2thp9A" target="_blank"><p align="center"><img src="imagenes/2022-I/elecciones_2022-I.jpg" height="150" width="220"><br>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 	}
+		// });
+				
+		new PNotify({
+	    title: '<center>GUÍAS RÁPIDAS - MATRÍCULA WEB</center>',
+	    text: '<font size=2><p align="Justify">Guía Rápida de usuario del sistema de Matr\u00edcula Web y Solicitud Web</font><br><font size=2>Guía Rápida de Matrícula Web </font><a href="documentos/manuales/GuiaRapidaMatricula.pdf" target="_blank">Descargar</a><br><font size=2>Solicitud Web </font><a href="documentos/manuales/Manual_Usuario_FUT_Online_Estudiante_V2.pdf" target="_blank">Descargar</a><br>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});
+
+		/*new PNotify({
+			title: '<center>CONSOLIDADO DE LOS RESULTADOS FINALES DEL PROCESO DE ELECCIONES ESTUDIANTILES FADE</center>',
+			text: '<font size=2><p align="Justify">Consolidado de los resultados finales del proceso de elecciones complementarias de estudianes de FADE.</font><br><a href="documentos/CONSOLIDADO_ELECCIONES_ESTUDIANTES_FADE.pdf" target="_blank">Descargar</a>',
+			addclass: 'custom',
+			delay: 75000,
+			buttons: {
+			  sticker: false
+			}
+		});*/
+
+		// new PNotify({
+	  //   title: '<center>PADRÓN ELECTORAL ESTUDIANTIL DE LAS ELECCIONES COMPLEMENTARIAS FADE 2021-2022</center>',
+	  //   text: '<font size=2><p align="Justify">Padrón electoral estudiantil FADE 2021-2022</font><br><a href="documentos/Padron_Estudiantes_FADE.pdf" target="_blank">Descargar</a>',
+	  //   addclass: 'custom',
+	  //   delay: 75000,
+	  //   buttons: {
+	  //     sticker: false
+	  // 	}
+		// });
+
+		
+
+		// new PNotify({
+		// 	title: '<center>PADRÓN ELECTORAL ESTUDIANTIL DEL PERIODO 2022-2023</center>',
+		// 	text: '<font size=2><p align="Justify">Padrón electoral estudiantil 2022-2023</font><br><a href="documentos/2022-I/PADRON_ESTUDIANTES_2022_2023.pdf" target="_blank">Descargar</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+
+				
+	/*	new PNotify({
+	    title: '<center>PADRÓN ELECTORAL ESTUDIANTIL DE FACSA, FADE, FAEDCOH Y FAU PARA EL PERIODO 2021-2022</center>',
+	    text: '<font size=2><p align="Justify">Padrón electoral estudiantil 2021-2022</font><br><a href="documentos/Padron_Estudiantes.pdf" target="_blank">Descargar</a>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});
+
+		new PNotify({
+	    title: '<center>CONSOLIDADO DE LOS RESULTADOS FINALES DEL PROCESO DE ELECCIONES</center>',
+	    text: '<font size=2><p align="Justify">Consolidado de los resultados finales del proceso de elecciones complementarias del estamento estudiantil</font><br><a href="documentos/CONSOLIDADO_ELECCIONES.pdf" target="_blank">Descargar</a>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});*/
+
+/*		new PNotify({
+	    title: '<center>CHARLA INFORMATIVA - ACADEMIA DIPLOMÁTICA 2022</center>',
+	    text: '<font size=2><p align="Justify">ACADEMIA DIPLOMÁTICA 2022 - CHARLA INFORMATIVA POR ZOOM</font><br>Martes 12 de Octubre 2021 07:00 PM</br><br>Puede ingresar dando click al siguiente enlace:<br><a href="https://us02web.zoom.us/j/84990273586?pwd=b1U1QmIxRlRTOEJ5U1dGU1IwaWloUT09" target="_blank">Ingresar a Zoom</a><br>ID de reunión: 849 9027 3586<br>Contraseña: 306715</p>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});*/
+
+	/*	new PNotify({
+	    title: '<center>PROCESO DE SUFRAGIO PARA ELECCIONES COMPLEMENTARIAS ESTUDIANTILES</center>',
+	    text: '<font size=2><p align="Justify">VIDEO INSTRUCTIVO</font><br>Click al siguiente enlace:<br><a href="https://drive.google.com/file/d/1NV3zlrJc9TEbU2NajdejJvXA4lZzd97N/view" target="_blank">Ir al Video</a></p>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});*/
+
+		// --------------------------------------
+
+	// new PNotify({
+	//     title: '<center>COMUNICADO MATRÍCULA 2020-II</center>',
+	//     text: '<a rel="prettyPhoto" href="imagenes/COMUNICADO-2020-II-CICLOS.png" target="_blank"><p align="center"><img src="imagenes/COMUNICADO-2020-II-CICLOS.png" height="260" width="220"><br>',
+	//     addclass: 'custom',
+	//     delay: 75000,
+	//     buttons: {
+	//       sticker: false
+	//   	}
+	// 	});
+
+	// <p align="center"><strong><a href="documentos/RSU-ENCUESTA-2021.pdf" target="_blank">VER INFORMACIÓN</a></strong></p>
+
+	// new PNotify({
+	// 	title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>ENCUESTA DE SATISFACCIÓN 2021</center></a></blink>',
+	// 	text: '<a rel="prettyPhoto" href="imagenes/RSU-NUEVA-ENCUESTA-2021.jpg" target="_blank"><font size="2"><img src="imagenes/RSU-NUEVA-ENCUESTA-2021.jpg" height=200px width=260px></font><br>  <br><center><strong>Oficina de Responsabilidad Social</strong></center>',
+	// 	addclass: 'custom',
+	// 	delay: 75000,
+	// 	buttons: {
+	// 		sticker: false
+	// 	}
+	// });
+
+				// new PNotify({
+			// 	title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>PROCESO A SEGUIR PARA LAS ELECCIONES</center></a></blink>',
+			// 	text: '<a rel="prettyPhoto" href="imagenes/SISTEMA_ELECCIONES_2021.png" target="_blank"><font size="2"><img src="imagenes/SISTEMA_ELECCIONES_2021.png" height=150px width=260px></font><br> <p align="center"><strong><a href="https://drive.google.com/file/d/1GNJUuFt3toI-HVzYQc8d09797q5VD28v/view?usp=sharing" target="_blank">VER VIDEO TUTORIAL</a></strong></p> <br><center><strong>Comite Electoral 2021 - 2022</strong></center>',
+			// 	addclass: 'custom',
+			// 	delay: 75000,
+			// 	buttons: {
+			// 		sticker: false
+			// 	}
+			// });
+	
+	// new PNotify({
+	// 	title: '&nbsp;<a href="#" style="font-size:12px; line-height: 20px;"><blink><center>CONSOLIDADO DE RESULTADOS PROCESO DE ELECCIONES DEL ESTAMENTO ESTUDIANTE PARA CONFORMAR LOS ORGANOS DE GOBIERNO AU Y COFA PERIODO 2021 - 2022</center></a></blink>',
+	// 	text: ' <font size="1"><p align="center"> <strong><a href="https://drive.google.com/file/d/1Sa4BJ4CDfETll2veBRc7DvPtkpa6Ewgo/view?usp=sharing" target="_blank"><< VER RESULTADOS >></a></strong>   </p></font> <br><center><strong>Comite Electoral 2021 - 2023</strong></center>',
+	// 	addclass: 'custom',
+	// 	delay: 75000,
+	// 	buttons: {
+	// 		sticker: false
+	// 	}
+	// });
+
+	// new PNotify({
+	// 	title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>CRONOGRAMA DE ELECCIONES GENERALES DE ESTUDIANTES</center></a></blink>',
+	// 	text: '<a rel="prettyPhoto" href="imagenes/ELECCIONES_2021_2.png" target="_blank"><font size="2"><img src="imagenes/ELECCIONES_2021_2.png" height=300px width=260px></font><br> <p align="center"><strong><a href="https://drive.google.com/file/d/1-yaBJW2alQkqifOhGv-6HgzWApQnKS3V/view?usp=sharing" target="_blank">VER PADRON ESTUDIANTES</a></strong></p> <br><center><strong>Comite Electoral 2021 - 2022</strong></center>',
+	// 	addclass: 'custom',
+	// 	delay: 75000,
+	// 	buttons: {
+	// 		sticker: false
+	// 	}
+	// });
+
+		
+	// new PNotify({
+	// 	    title: '<center>ÁREA DE TESORERÍA</center>',
+	// 	    text: '<a rel="prettyPhoto" href="imagenes/2022-II/AREA_DE_TESORERIA_ACTUALIZADO_2022_II.png" target="_blank"><p align="center"><img src="imagenes/2022-II/AREA_DE_TESORERIA_ACTUALIZADO_2022_II.png" height="260" width="220"><br>',
+	// 	    addclass: 'custom',
+	// 	    delay: 75000,
+	// 	    buttons: {
+	// 	      sticker: false
+	// 	  	}
+	// 		});
+
+	// new PNotify({
+	// 		    title: '<center>COMUNICADO - OBUN</center>',
+	// 		    text: '<a rel="prettyPhoto" href="imagenes/2022-I/COMUNICADO_OBUN_2022-I.png" target="_blank"><p align="center"><img src="imagenes/2022-I/COMUNICADO_OBUN_2022-I.png" height="260" width="220"><br>',
+	// 		    addclass: 'custom',
+	// 		    delay: 75000,
+	// 		    buttons: {
+	// 		      sticker: false
+	// 		  	}
+	// 			});
+
+	// new PNotify({
+	// 	title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>PROCEDIMIENTO DE PAGO DE TASAS ADMINISTRATIVAS Y ACADÉMICAS - 2021</center></a></blink>',
+	// 	text: '<a rel="prettyPhoto" href="imagenes/PROC-PAGO-TASAS-ADM.jpg" target="_blank"><font size="2"><img src="imagenes/PROC-PAGO-TASAS-ADM.jpg" height=150px width=260px></font><br> <br><center><strong></strong></center>',
+	// 	addclass: 'custom',
+	// 	delay: 75000,
+	// 	buttons: {
+	// 		sticker: false
+	// 	}
+	// });
+	// new PNotify({
+	// 	title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>PROCEDIMIENTO DE PAGO DE TASAS ADMINISTRATIVAS Y ACADÉMICAS - 2023</center></a></blink>',
+	// 	text: '<a rel="prettyPhoto" href="imagenes/2023-II/PROCEDIMIENTO_DE_PAGO_DE_TASAS_ADMINISTRATIVAS_Y_ACADEMICAS_2023-01.png" target="_blank"><font size="2"><img src="imagenes/2023-II/PROCEDIMIENTO_DE_PAGO_DE_TASAS_ADMINISTRATIVAS_Y_ACADEMICAS_2023-01.png" height=150px width=260px></font><br> <br><center><strong></strong></center>',
+	// 	addclass: 'custom',
+	// 	delay: 75000,
+	// 	buttons: {
+	// 		sticker: false
+	// 	}
+	// });
+	new PNotify({
+	    title: '<a href="https://drive.google.com/drive/folders/1zGM32CU146ER1S47WwrThY1IgGvmOPfJ?usp=sharing" style="font-size:12px; color: white;" target="_blank"><center>PAGO DE MATRICULA Y CUOTAS POR PASARELA - 2024</center></a>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});
+	new PNotify({
+	    title: '<a href="https://drive.google.com/drive/folders/1ZX4a8uuAgX4MatY_b0iCj_HRfn0KJv2q?usp=sharing" style="font-size:12px; color: white;" target="_blank"><center>PAGO DE TASAS ADMINISTRATIVAS POR PASARELA - 2024</center></a>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});
+
+	// new PNotify({
+	//     title: '<center>DIRECTORIO TELEFÓNICO</center>',
+	//     text: '<a rel="prettyPhoto" href="imagenes/DIRECTORIO-UPT.png" target="_blank"><p align="center"><img src="imagenes/DIRECTORIO-UPT.png" height="260" width="220"><br>',
+	//     addclass: 'custom',
+	//     delay: 75000,
+	//     buttons: {
+	//       sticker: false
+	//   	}
+	// 	});
+
+		// new PNotify({
+	  //   title: '<center>DIRECTORIO TELEFÓNICO DEL ÁREA DE TESORERÍA</center>',
+	  //   text: '<a rel="prettyPhoto" href="imagenes/COBRANZAS-03.png" target="_blank"><p align="center"><img src="imagenes/COBRANZAS-03.png" height="150" width="220"><br>',
+	  //   addclass: 'custom',
+	  //   delay: 75000,
+	  //   buttons: {
+	  //     sticker: false
+	  // 	}
+		// });
+
+	/*	new PNotify({
+	    title: '<center>CONTACTO ÁREA DE TESORERÍA</center>',
+	    text: '<a rel="prettyPhoto" href="imagenes/2021-II/CONTACTO_TESORERIA.png" target="_blank"><p align="center"><img src="imagenes/2021-II/CONTACTO_TESORERIA.png" height="300" width="220"><br>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});*/
+
+		// new PNotify({
+	 //    title: '<center>GUÍA DE FICHA DE ACTUALIZACIÓN</center>',
+	 //    text: '<font size=2><p align="Justify">Ficha de actualización de datos de estudiantes</font><br><font size=2>Guía Rápida </font><a href="documentos/manuales/Ficha_Actualizacion_Datos.pdf" target="_blank">Descargar</a><br>',
+	 //    addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+		// new PNotify({
+	 //    title: '<center>DIRECTIVA DE MORAS Y COBRANZAS</center>',
+	 //    text: '<font size=2><p align="Justify">Directiva de Cobranza de Mora por Derechos de Enseñanza y la Directiva de Gestión de Pagos por Derechos de Enseñanza en Pregrado</font><br><font size=2>Directiva de Moras </font><a href="documentos/Reglamentos_Directivas/DIRECTIVA_2019_NUEVA_TASA_MORA.pdf" target="_blank">Descargar</a><br><font size=2>Directiva de Cobranzas </font><a href="documentos/Reglamentos_Directivas/DIRECTIVA_2019_COBRANZAS.pdf" target="_blank">Descargar</a><br>',
+	 //    addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+
+		// new PNotify({
+	 //    title: '<center>COMUNICADO OBUN</center>',
+	 //    text: '<a rel="prettyPhoto" href="imagenes/OBUN_COMUNICADO_2019_II.png" target="_blank"><p align="center"><img src="imagenes/OBUN_COMUNICADO_2019_II.png" height="260" width="220"><br>',
+	 //    addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+		// new PNotify({
+		//   title: '<center>COMUNICADO</center>',
+		//   text: '<font size=1 ><p align="Justify">SE COMUNICA A LOS ESTUDIANTES DE LA UNIVERSIDAD PRIVADA, QUE SE HA APROBADO EL CRONOGRAMA DE BECAS Y SUBVENCION SEGÚN EL SIGUIENTE DETALLLE: <br> <p align="center"><strong>PRESENTACION DE EXPEDIENTES DEL 12 AL 16 DE AGOSTO DEL 2019.</strong></p> <br> <a href="documentos/OBUN_BECAS_SUBVENCIONES_2019_II.pdf" target="_blank">Ver Comunicado</a> <br><br><font size=1><p align="right"><strong>Oficina de Bienestar Universitario</strong></p></font>',
+		//   addclass: 'custom',
+		//   delay: 75000,
+		//   buttons: {
+		//     sticker: false
+		// 	}
+		// });
+
+		// COMENTADO 25/03/2020
+		// --------------------------------------
+		// new PNotify({
+		//   title: '<center>COMUNICADO</center>',
+		//   text: '<font size=1 ><p align="Justify">SE COMUNICA A LOS ESTUDIANTES DE LA UNIVERSIDAD PRIVADA, QUE SE HA APROBADO EL CRONOGRAMA DE BECAS Y SUBVENCION SEGÚN EL SIGUIENTE DETALLLE: <br> <p align="center"><strong>PRESENTACION DE EXPEDIENTES DEL 02 AL 18 DE MARZO DEL 2020.</strong></p> <br> <a href="documentos/OBUN_BECAS_SUBVENCIONES_2020_I.pdf" target="_blank">Ver Comunicado</a> <br><br><font size=1><p align="right"><strong>Oficina de Bienestar Universitario</strong></p></font>',
+		//   addclass: 'custom',
+		//   delay: 75000,
+		//   buttons: {
+		//     sticker: false
+		// 	}
+		// });
+		// --------------------------------------
+
+
+		// new PNotify({
+		//   title: '<center>COMUNICADO</center>',
+		//   text: '<font size=1 ><p align="Justify">SE COMUNICA A LOS ESTUDIANTES DE LA UNIVERSIDAD PRIVADA, QUE SE HA APROBADO EL CRONOGRAMA DE BECAS Y SUBVENCION SEGÚN EL SIGUIENTE DETALLLE: <br> <p align="center"><strong>PRESENTACION DE EXPEDIENTES DEL 14 AL 30 DE SETIEMBRE DEL 2020.</strong></p> <br> <center><a href="documentos/OBUN_BECAS_SUBVENCIONES_2020_II.pdf" target="_blank">Ver Comunicado</a></center> <br><br><font size=1><p align="right"><strong>Oficina de Bienestar Universitario</strong></p></font>',
+		//   addclass: 'custom',
+		//   delay: 75000,
+		//   buttons: {
+		//     sticker: false
+		// 	}
+		// });
+
+
+		// new PNotify({
+		//   title: '<center>COMUNICADO</center>',
+		//   text: '<font size=1 ><p align="Justify">SE COMUNICA A LOS ESTUDIANTES DE LA UNIVERSIDAD PRIVADA, QUE SE HA APROBADO EL CRONOGRAMA DE BECAS Y SUBVENCION SEGÚN EL SIGUIENTE DETALLLE: <br> <p align="center"><strong>PRESENTACION DE EXPEDIENTES DEL 10 AL 24 DE MARZO DEL 2021.</strong></p> <br> <center><a href="documentos/OBUN_BECAS_SUBVENCIONES_2021_I.pdf" target="_blank">Ver Comunicado</a></center> <br><br><font size=1><p align="right"><strong>Oficina de Bienestar Universitario</strong></p></font>',
+		//   addclass: 'custom',
+		//   delay: 75000,
+		//   buttons: {
+		//     sticker: false
+		// 	}
+		// });
+
+
+		/* ACTUAL NOTIFICACION - ROBERTO*/
+		/* new PNotify({
+	    title: '<center>MANUAL DE MATRÍCULA WEB</center>',
+	    text: '<font size=2 ><p align="Justify">Manual de usuario del sistema de Matr\u00edcula Web y Solicitud Web</strong><br><a rel="prettyPhoto" href="documentos/Manuales/FUT_WEB.pdf" target="_blank">Manual de SOLICITUD WEB<br><br><a rel="prettyPhoto" href="documentos/Manuales/MATRICULA.pdf" target="_blank">Manual de MATRÍCULA WEB<br><a rel="prettyPhoto" href="documentos/videotutorial_MatriculaWeb.mp4" target="_blank">Video MATRÍCULA WEB<br>',
+	    addclass: 'custom',
+	    delay: 75000,
+	    buttons: {
+	      sticker: false
+	  	}
+		});
+		*/
+
+		// new PNotify({
+	 //    title: '<center>COMUNICADO</center>',
+	 //    text: '<font size=2 ><p align="Justify">Se comunica a los señores docentes de la Universidad Privada de Tacna que deben de actualizar su ?Hoja de Vida? de preferencia con sus últimos 5 años de trayectoria laboral, enviar el archivo al correo: escalafon@upt.edu.pe <br><font size=1><p align="right">Área de Gestión del Potencial Humano - Escalafón</strong><br><a rel="prettyPhoto" href="documentos/HojaVida_Docente.doc" target="_blank">Descargue Formato<br>',
+	 //    addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+			// new PNotify({
+		 //    title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>CRONOGRAMA DE ELECCIONES GENERALES DE ESTUDIANTES</center></a></blink>',
+		 //    text: '<a rel="prettyPhoto" href="imagenes/ELECCIONES_2018_2019.png" target="_blank"><font size="2"><img src="imagenes/ELECCIONES_2018_2019.png" height=300px width=260px></font><br><center><strong>Comite Electoral 2018-2019</strong></center>',
+		 //    addclass: 'custom',
+		 //    delay: 75000,
+		 //    buttons: {
+		 //      sticker: false
+		 //  	}
+			// });
+
+			// new PNotify({
+		 //    title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>CRONOGRAMA DE ELECCIONES GENERALES DE ESTUDIANTES</center></a></blink>',
+		 //    text: '<a rel="prettyPhoto" href="documentos/CRONOGRAMA-ELECCIONES-2019-2020-CE.pdf" target="_blank"><font size="2"><img src="imagenes/CE_174_2019_UPT_CU.png" height=300px width=260px></font><br><br><center><strong>Comite Electoral 2019-2020</strong></center>',
+		 //    addclass: 'custom',
+		 //    delay: 75000,
+		 //    buttons: {
+		 //      sticker: false
+		 //  	}
+			// });
+
+
+
+	// new PNotify({
+ //    title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>PROGRAMA FERREYCORP</center></a></blink>',
+ //    text: '<a rel="prettyPhoto" href="documentos/FLAYER_PARA_INSCRIPCION_FERREYCORP.pdf" target="_blank"><font size="2"><img src="imagenes/afiche_ferreyro2019-II.jpg" height=150px width=260px></font><br><br>',
+ //    addclass: 'custom',
+ //    delay: 75000,
+ //    buttons: {
+ //      sticker: false
+ //  	}
+	// });
+
+	// COMENTADO 25/03/2020
+	// --------------------------------------
+	// new PNotify({
+	// 	title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>CALENDARIO ACADÉMICO 2020-I</center></a></blink>',
+	// 	text: '<a rel="prettyPhoto" href="imagenes/CALENDARIO_ACADEMICO_2020_I.png" target="_blank"><p align="center"><img src="imagenes/CALENDARIO_ACADEMICO_2020_I.png" height="170" width="210"> <br><font size=1><p align="right"><strong>Vicerrectorado Académico</strong></p></font>',
+	// 	addclass: 'custom',
+	// 	delay: 75000,
+	// 	buttons: {
+	// 		sticker: false
+	// 	}
+	// });
+	// --------------------------------------
+
+	// COMENTADO 25/03/2020
+	// --------------------------------------
+	// 	new PNotify({
+  //   title: '&nbsp;<a href="#" style="font-size:12px;"><blink><center>VALOR CRÉDITO 2020-I</center></a></blink>',
+  //   text: '<a rel="prettyPhoto" href="https://net.upt.edu.pe/documentos/2023-I/VALOR_CREDITO_2023_I.pdf" target="_blank"><p align="center"><img src="imagenes/COSTO_CREDITO_2020-I.png" height="170" width="210"> <br><p align="center"><font size="2"><strong>Costo de crédito vigente en el semestre Académico 2020-I </strong></font></p></p>',
+  //   addclass: 'custom',
+  //   delay: 75000,
+  //   buttons: {
+  //     sticker: false
+  // 	}
+	// });
+	// --------------------------------------
+
+		// new PNotify({
+	 //    title: '&nbsp;<a href="#" style="font-size:10px;"><blink><center>CONCURSO DE EXPERIENCIAS EXITOSAS</center></a></blink>',
+	 //   	text: '<a rel="prettyPhoto" href="imagenes/VOLANTE-EXPERIENCIAS EXITOSAS-FINAL.jpg" target="_blank"><p align="center"><img src="imagenes/VOLANTE-EXPERIENCIAS EXITOSAS-FINAL.jpg" height="230" width="170"> <br><font size=1><p align="right"><strong>Oficina de GPAD</strong></p></font>',
+	 // 		addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+		// new PNotify({
+	 //    title: '&nbsp;<a href="#" style="font-size:10px;"><blink><center>COMUNICADO</center></a></blink>',
+	 //   	text: '<a rel="prettyPhoto" href="imagenes/comunicado-DocIncompletos.png" target="_blank"><p align="center"><img src="imagenes/comunicado-DocIncompletos.png" height="180" width="210"> <br><font size=1><p align="right"><strong>Oficina de Admisión y Marketing</strong></p></font>',
+	 // 		addclass: 'custom',
+	 //    delay: 75000,
+	 //    buttons: {
+	 //      sticker: false
+	 //  	}
+		// });
+
+		// new PNotify({
+	  //   title: '<center>AULA VIRTUAL</center>',
+	  //   text: '<a rel="prettyPhoto" href="imagenes/COMUNICADO-AULAVIRTUAL-3.jpg" target="_blank"><p align="center"><img src="imagenes/COMUNICADO-AULAVIRTUAL-3.jpg" height="260" width="220">',
+	  //   addclass: 'custom',
+	  //   delay: 75000,
+	  //   buttons: {
+	  //     sticker: false
+	  // 	}
+		// });
+
+
+	// new PNotify({
+ //    title: '<center>COMUNICADO</center>',
+ //    text: '<a rel="prettyPhoto" href="imagenes/COMUNICADO_MORAS_2019.jpg" target="_blank"><p align="center"><img src="imagenes/COMUNICADO_MORAS_2019.jpg" height="150" width="220"><br>',
+ //    addclass: 'custom',
+ //    delay: 75000,
+ //    buttons: {
+ //      sticker: false
+ //  	}
+	// });
+
+		// new PNotify({
+	  //   title: '<center>CANALES BCP</center>',
+	  //   text: '<a rel="prettyPhoto" href="imagenes/BANNER_BPC_UPT.png" target="_blank"><p align="center"><img src="imagenes/BANNER_BPC_UPT.png" height="260" width="220">',
+	  //   addclass: 'custom',
+	  //   delay: 75000,
+	  //   buttons: {
+	  //     sticker: false
+	  // 	}
+		// });
+
+
+// new PNotify({
+//   title: '<center>COMUNICADO</center>',
+//   text: '<font size=2 ><p align="Justify">La Oficina de Bienestar Universitario, informa a los estudiantes que en caso de accidentes deben de apersonarse a las Clínicas Afiliadas en Tacna, PROMEDIC y Santa Isabel para su atención, portando su DNI en cuyos establecimientos deben de solicitar la hoja de denuncia de accidentes. <br><br> Además, también indicar que la atención es a nivel nacional en clínicas afiliadas. <br><br><font size=1><p align="right"><strong>Oficina de Bienestar Universitario</strong></p></font>',
+//   addclass: 'custom',
+//   delay: 75000,
+//   buttons: {
+//     sticker: false
+// 	}
+// });
+
+// new PNotify({
+//   title: '<center>COMUNICADO</center>',
+//   text: '<font size=2 ><p align="Justify">SE COMUNICA A LOS ESTUDIANTES DE LA UNIVERSIDAD PRIVADA, QUE SE HA APROBADO EL CRONOGRAMA DE BECAS Y SUBVENCION SEGÚN EL SIGUIENTE DETALLLE: <br><br> <p align="center"><strong>PRESENTACION DE EXPEDIENTES DEL 04 AL 22 DE MARZO DEL 2019.</strong></p> <br><br> <p align="left"><strong>NOTA IMPORTANTE:</strong></p> Para la Subvención de Escasos Recursos Económicos pueden postular los estudiantes que se encuentren en una situación económica limitada, que se encuentren matriculados en el 3° ciclo, en condición de invictos, y que sean menores de 24 años de edad. <br><br> Mayor información en la Oficina de Bienestar Universitario Campus Capanique I, 2do piso. <br><br><font size=1><p align="right"><strong>Oficina de Bienestar Universitario</strong></p></font>',
+//   addclass: 'custom',
+//   delay: 75000,
+//   buttons: {
+//     sticker: false
+// 	}
+// });
+
+// new PNotify({
+//   title: '<center>?SEMINARIO VIRTUAL INTERNACIONAL CATEC 2020-I</center>',
+// 	text: '<font size=2 ><p align="Justify">Evento de capacitación tecnológica organizado por el grupo de estudiantes del curso de Taller de Liderazgo y Emprendimiento denominado ?FORJANDO LÍDERES?, dirigido a estudiantes de la Universidad y público en general interesado en temas tecnológicos de vanguardia </p> <br><br> <a  href="https://net.upt.edu.pe/documentos/CATEC-2020-I.pdf" target="_blank"><blink><font size="1" >(Descargar Afiche para Visualizar contenido) </font></blink></a>',
+//   addclass: 'custom',
+//   delay: 75000,
+//   buttons: {
+//     sticker: false
+// 	}
+// });
+
+
+// new PNotify({
+//   title: '<center>CONCURSO DE PROGRAMACIÓN "III PROGRAMMING CONTEST" CATEC 2020-I</center>',
+// 	text: '<font size=2 ><p align="Justify">Evento organizado por el grupo de estudiantes del curso de Taller de Liderazgo y Emprendimiento denominado "FORJANDO LÍDERES", dirigido a estudiantes de la Escuela Profesional de Ingeniería de Sistemas de la Universidad Privada de Tacna. Este evento permitirá a los estudiantes demostrar su espíritu competitivo, fortalecer y demostrar las habilidades en resolución de problemas, programación y trabajo en equipo. El evento se realizará el <strong style="color:#ECA815;">08 de agosto de 9.00 am a 12.00 pm</strong>. </p></font> <br> <div style="text-align: center;"> <a  href="https://net.upt.edu.pe/documentos/PROGRAMMING-CONTEST-CATEC-2020-I.pdf" target="_blank"><blink><font size="1" >(Descargar Afiche para Visualizar contenido) </font></blink></a> </div>',
+//   addclass: 'custom',
+//   delay: 75000,
+//   buttons: {
+//     sticker: false
+// 	}
+// });
+
+
+// new PNotify({
+//   title: '<center>CONCURSO DE PROYECTOS - EPIS 2020-I</center>',
+// 	text: '<font size=2 ><p align="Justify">Evento dirigido a estudiantes de la Escuela Profesional de Ingeniería de Sistemas de la Universidad Privada de Tacna y se realizará de manera virtual el día <strong style="color:#ECA815;">21 de agosto a las 16.00 horas</strong>. </p></font> <br> <div style="text-align: center;"> <a  href="https://net.upt.edu.pe/documentos/CONCURSO_PROYECTOS_EPIS_2020_I.pdf" target="_blank"><blink><font size="1" >(Descargar Afiche para Visualizar contenido) </font></blink></a> </div>',
+//   addclass: 'custom',
+//   delay: 75000,
+//   buttons: {
+//     sticker: false
+// 	}
+// });
+
+//new PNotify({
+//  title: '<center>GUÍA DE PAGOS</center>',
+//	text: '<font size=2 ><p align="Justify">Guías de pago de los canales digitales: </p> <br> <ul><li> <a  href="https://net.upt.edu.pe/documentos/BANCOS/GUIA-BANCO-BCP-MOVIL.pdf" target="_blank"><blink><font size="1" >BCP MÓVIL </font></blink></a>    </li> <li><a  href="https://net.upt.edu.pe/documentos/BANCOS/GUIA-BANCO-BCP-WEB.pdf" target="_blank"><blink><font size="1" >BCP WEB </font></blink></a>   </li> <li> <a  href="https://net.upt.edu.pe/documentos/BANCOS/GUIA-BANCO-SCOTIABANK-MOVIL.pdf" target="_blank"><blink><font size="1" >SCOTIABANK MÓVIL </font></blink></a>   </li> <li> <a  href="https://net.upt.edu.pe/documentos/BANCOS/GUIA-BANCO-SCOTIABANK-WEB.pdf" target="_blank"><blink><font size="1" >SCOTIABANK WEB </font></blink></a> </li></ul>',
+//  addclass: 'custom',
+//  delay: 75000,
+//  buttons: {
+//    sticker: false
+//	}
+//});
+
+new PNotify({
+  title: '<center>GUÍA DE PAGOS</center>',
+	text: '<font size=2 ><p align="Justify">Guías de pago de los canales digitales: </p> <br> <ul><li> <a  href="https://drive.google.com/drive/folders/1zqBk8kL2i3SKaczvBoSiH5L9v3MEe7Pj?usp=sharing" target="_blank"><blink><font size="1" >BCP MÓVIL </font></blink></a>    </li> <li><a  href="https://net.upt.edu.pe/documentos/BANCOS/GUIA-BANCO-BCP-WEB.pdf" target="_blank"><blink><font size="1" >BCP WEB </font></blink></a>   </li> <li> <a  href="https://net.upt.edu.pe/documentos/BANCOS/GUIA-BANCO-SCOTIABANK-MOVIL.pdf" target="_blank"><blink><font size="1" >SCOTIABANK MÓVIL </font></blink></a>   </li> <li> <a  href="https://net.upt.edu.pe/documentos/BANCOS/GUIA-BANCO-SCOTIABANK-WEB.pdf" target="_blank"><blink><font size="1" >SCOTIABANK WEB </font></blink></a> </li></ul>',
+  addclass: 'custom',
+  delay: 75000,
+  buttons: {
+    sticker: false
+	}
+});
+
+		/*
+		$.gritter.add({
+			title: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CURSO BASICO DE AULAS VIRTUALES',
+			text: '<br><img src="imagenes/lp1.png" width="280"><br><br><div align="center">Inicio de clases: 01 de agosto del 2013<br><a  href="https://net.upt.edu.pe/imagenes/130711_curso_basico_Aulas_virtuales_docentes-2013-II.png" target="_blank"><blink><font size="1" >(Descargar Afiche para Visualizar contenido) </font></blink></a></div>',
+			sticky: false,
+			time: 75000
+		});
+		*/
+		/*
+		$.gritter.add({
+			title: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+			text: '<br><img src="imagenes/ALAOPINION.jpg" height="750" width="290"></br>',
+			sticky: false,
+			time: 75000
+		});
+		*/
+		/*
+
+		$.gritter.add({
+			title: 'AVISO',
+			text: '<p>CAJA CHICA: <br> Este formato se adjuntará correctamente llenado con la documentación para pedir renovación de caja chica, gastos de representación y capital de trabajo según sea el caso. </p> <br><a  href="https://net.upt.edu.pe/documentos/caja_chica.pdf" target="_blank">FORMATO PARA CAJA CHICA <blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a><p style="font-size: 8pt" align="right"><b>Área de Tesorería<br></b></p>',
+			image: 'imagenes/logupt.png',
+			sticky: false,
+			time: 75000
+		});
+
+
+		$.gritter.add({
+			title: 'AVISO',
+			text: '<p>RECIBO DE COMPROMISO: <br> Este formato se adjuntará correctamente llenado con la documentación para solicitar habilitación de fondos (viáticos y cuentas a rendir). </p> <br><a  href="https://net.upt.edu.pe/documentos/recibo_compromiso.pdf" target="_blank">FORMATO DE RECIBO DE COMPROMISO<blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a><p style="font-size: 8pt" align="right"><b>Área de Tesorería<br></b></p>',
+			image: 'imagenes/logupt.png',
+			sticky: false,
+			time: 75000
+		});
+		*/
+		/*PARA FACSA*/
+		/*$.gritter.add({
+			title: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+			text: '<br><img src="imagenes/gpad.jpg" height=180px width=280px></br>',
+			sticky: false,
+			time: 75000
+		});	*/
+
+	// new PNotify({
+ //    title: '<center>CONCURSO DE EXPERIENCIAS EXITOSAS</center>',
+ //    text: '<a rel="prettyPhoto" href="imagenes/expericenciasexitosas.png" target="_blank"><p align="center"><img src="imagenes/expericenciasexitosas.png" height="250" width="220">',
+ //    addclass: 'custom',
+ //    delay: 75000,
+ //    buttons: {
+ //      sticker: false
+ //  	}
+	// });
+
+
+
+
+// new PNotify({
+//     title: '<center>CATEC 2020-II</center>',
+//     text: '<a rel="prettyPhoto" href="imagenes/epis_catec.jpg" target="_blank"><p align="center"><img src="imagenes/epis_catec.jpg" height="250" width="220">',
+//     addclass: 'custom',
+//     delay: 75000,
+//     buttons: {
+//       sticker: false
+//   	}
+// 	});
+
+// 	new PNotify({
+//     title: '<center>DESARROLLO DE COMPETENCIAS EN EL USO DE TECNOLOGÍAS WEB</center>',
+//     text: '<a rel="prettyPhoto" href="imagenes/epis_desarrollo.png" target="_blank"><p align="center"><img src="imagenes/epis_desarrollo.png" height="250" width="220">',
+//     addclass: 'custom',
+//     delay: 75000,
+//     buttons: {
+//       sticker: false
+//   	}
+// 	});
+
+//			$.gritter.add({
+//				title: 'COMUNICADO',
+//				text: '<p>Se informa a los Srs. Estudiantes que habiéndose llevado a cabo las elecciones estudiantiles para conformar los órganos de gobierno, período 2012-2013, y de conformidad con el Artículo 50 inciso "b" del TUO del Reglamento General de Elecciones de los Órganos de Gobierno de la UPT, y Resolución N° 098-2011-UPT-CU del 01/07/2011, a todos los estudiantes que no hallan sufragado,  se les aplicará la multa de S/. 15.00  y que será cargada en la 5ta cuota a ser cancelada del 03 al 07de diciembre.</p> <p style="font-size: 8pt" align="right"><b>Oficina de Administración <br>Area de Cobranzas</b></p>',
+//				image: 'imagenes/logupt.png',
+//				sticky: false,
+//				time: 15000
+//			});
+//			return false;
+
+	// new PNotify({
+ //    title: '<center>COMUNICADO</center>',
+ //    text: '<p align="Justify">Cronograma de Elecciones Generales del Estamento Docente para conformar los organos de Gobiernos: Asamblea Universitaria y Consejo de Facultad de la Universidad Privada de Tacna Periodo 2018 - 2020</p><p align="right"><a href="https://net.upt.edu.pe/documentos/COMUNICADO_CE_2018_2020.pdf" target="_blank"><font size="1" style="text-align: right;"><br>(Visualizar Cronograma) </font></a></p>',
+ //    addclass: 'custom',
+ //    delay: 75000,
+ //    buttons: {
+ //      sticker: false
+ //  	}
+	// });
+
+	// new PNotify({
+ //    title: '<center>COMUNICADO</center>',
+ //    text: '<p align="Justify">Se comunica a los estudiantes que fueron elegidos como miembros de mesa de las Elecciones Estudiantiles 2018-2019 que deben de recoger sus credenciales en la Oficina del Comité Electoral hasta el día 20 de Noviembre en horarios de 08:00 a 13:00 Hrs. y de 16:00 a 19:00 Hrs.</p><p align="right"><a href="https://net.upt.edu.pe/documentos/REALCION-MIEMBROS-MESA 2018-2019.pdf" target="_blank"><font size="1" style="text-align: right;"><br>(LISTA DE MIEMBROS DE MESA) </font></a></p>',
+ //    addclass: 'custom',
+ //    delay: 75000,
+ //    buttons: {
+ //      sticker: false
+ //  	}
+	// });
+
+	// $.gritter.add({
+	// 	title: '<h3><center>COMUNICADO</center></h3>',
+	// 	text: '<div align="center"><font size=2>Cronograma de Elecciones Generales del Estamento Docente para conformar los organos de Gobiernos: Asamblea Universitaria y Consejo de Facultad de la Universidad Privada de Tacna Periodo 2018 - 2020</font><a  href="https://net.upt.edu.pe/documentos/COMUNICADO_CE_2018_2020.pdf" target="_blank"><blink><font size="2" ><br>(Visualizar Cronograma) </font></blink></a></div>',
+	// 	sticky: false,
+	// 	time: 75000
+	// });
+
+			FncParpadear();
+
+			/*
+			new PNotify({
+		    title: '<center>OFICINA DE BIENESTAR UNIVERSITARIO</center>',
+		    text: '<p align="Justify" style="line-height:16px; font-size:11.5px;">Se comunica a los estudiantes que la renuncia al seguro contra accidentes, semestre Académico 2018-II se realiza de acuerdo al siguiente cronograma  <br><br> FECHA: DEL 06 AL 24 DE AGOSTO 2018<br> HORARIO: 08:15 a 12:45 y 17:15 a 19.45 HRS.<br> LUGAR: UNIDAD DE ASISTENCIA SOCIAL<br> <br> Debiendo presentar la constancia del seguro alterno y la solicitud de no afiliación al seguro contra accidentes de la UPT. <br></p><p align="right">Jefatura OBUN</p>',
+		    addclass: 'custom',
+		    delay: 75000,
+		    buttons: {
+		      sticker: false
+		  	}
+			});
+
+			new PNotify({
+		    title: '<center>OFICINA DE BIENESTAR UNIVERSITARIO</center>',
+		    text: '<p align="Justify" style="line-height:16px; font-size:11px;">Según Resolución Rectoral N° 769-2018-UPT-R. se aprueba el cronograma de becas y subvenciones para el semestre Académico 2018-II, de acuerdo al siguiente detalle: <br><br> <center>PRESENTACIÓN DE EXPEDIENTES</center> <br> FECHA: DEL 06 AL 17 DE AGOSTO 2018<br> HORARIO: 08:15 a 12:30 y 17:00 a 19.30 HRS.<br> LUGAR: UNIDAD DE ASISTENCIA SOCIAL<br> <br></p><p align="right">Jefatura OBUN</p>',
+		    addclass: 'custom',
+		    delay: 75000,
+		    buttons: {
+		      sticker: false
+		  	}
+			});*/
+			
+		}
+
+
+		// new PNotify({
+		// 	title: '<center>VALORACIÓN DE EXPERIENCIA DE USUARIO WEB - UPT</center>',
+		// 	text: '<font size=2><p align="Justify">Es muy importante conocer tu opinión y experiencias en nuestro en la web Universidad Privada de Tacna.<br><br><a href="https://forms.gle/Lrneq8VoaJbNyVRX6" target="_blank"><img src="imagenes/2023-II/valoracion_encuesta.jpg" height=150px width=260px></a></font><br><a href="https://forms.gle/Lrneq8VoaJbNyVRX6" target="_blank">Encuesta</a>',
+		// 	addclass: 'custom',
+		// 	delay: 75000,
+		// 	buttons: {
+		// 		sticker: false
+		// 		}
+		// });
+		
+			});
+
+
+
+function FncParpadear(){
+	if(($("#various56").css("opacity")) == 0)
+		$("#various56").css({ opacity: 1 });
+	else
+		$("#various56").css({ opacity: 0 });
+	setTimeout("FncParpadear();", 500);
+}
+
+</script>
+
+<!-- PARA VER AFICHE CON AJAX -->
+		<!-- <a id="kamousagi" href="imagenes/COMUNICADO-CICLOS-PRESENCIAL-FAING-2020-II.png" target="_blank" rel="prettyPhoto" href="imagenes/COMUNICADO-CICLOS-PRESENCIAL-FAING-2020-II.png" style="display: none;"></a>  -->
+	
+
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/POLITICA-CALIDAD-2020.png" style="display: none;"></a>  -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/comunicado-matriculas-2020-II.png" style="display: none;"></a> -->
+ 	<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/TU-OPINION-CUENTA-2020-II.png" style="display: none;"></a> -->
+
+<link rel="stylesheet" type="text/css" href="uptlogin/scripts/magnific/magnific-popup.css"></link>
+<script language="javascript" type="text/javascript" src="uptlogin/scripts/magnific/jquery.magnific-popup.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+	$(document).ready(function(){
+
+    $('.parent-container').magnificPopup({
+      delegate: 'a', // child items selector, by clicking on it popup will open
+      type: 'image',
+      gallery:{
+        enabled:true,
+        navigateByImgClick: true
+      },
+      tClose: 'Cerrar (Esc)', // Alt text on close button
+      tLoading: 'Cargando...',    });
+
+    $("#kamousagi2").click();
+
+	});
+</script>
+
+<div class="parent-container" style="display: none;">
+		<a id="kamousagi2" href="imagenes/2025-II/PROGRAMA_BECAS_MOVILIDAD.jpg"></a>
+	<a id="kamousagi2" href="imagenes/2025-II/PROGRAMA_MAGALLANES_MOVILIDAD.jpg"></a>
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/COMUNICADO_PRIMEROS_AUXILIOS.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/CONVOCATORIA_ABIERTA_ESTUDIANTE.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/CONVOCATORIA_ABIERTA_DOCENTE.jpeg"></a> -->
+			<a id="kamousagi2" href="imagenes/2025-II/BUEN_PAGADOR.jpg"></a>
+			<!-- <a id="kamousagi2" href="imagenes/2025-II/COMUNICADO_TU_OPINION_CUENTA_2025-II.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/capacitacion_seguimiento_2025-II.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/capacitacion_seguimiento.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/capacitacion_silabo.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/COMUNICADO_REGULARIZACION_DOCUMENTOS.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/COMUNICADO_BCP.png"></a> -->
+	<a id="kamousagi2" href="imagenes/2025-II/COMUNICADO_COMUNIDAD_UNIVERSITARIA.png"></a>
+	<!-- <a id="kamousagi2" href="imagenes/2025-II/COMUNICADO_DIA_DOCENTE_UNIVERSITARIO.png"></a> -->
+	<a id="kamousagi2" href="imagenes/2025-II/COMUNICADO_DESCUENTO_PRONTO_PAGO.jpg"></a>
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/PROCEDIMIENTO_MATRICULA_INGRESANTES_01.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/PROCEDIMIENTO_MATRICULA_INGRESANTES_02.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/PROCEDIMIENTO_MATRICULA_INGRESANTES_03.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/comunicado_elecciones_estudiantes_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/Flyer_Jornada_Odontologica_Nuevo.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/IMG-20250610-WA0047.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/IMG-20250610-WA0046.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/IMG-20250610-WA0045.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/IMG-20250610-WA0044.jpg"></a> -->
+		<!-- <a id="kamousagi2" href="imagenes/2025-I/Flyer_Remate_Libros_Editorial_UPT_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/COMUNICADO_26_MAYO_2025.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/Comunicado_Comite_Electoral_2025_Nuevo.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/CRONOGRAMA_ELECCIONES_ESTUDIANTES_2025_2026_Nuevo.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/capacitacion_docentes_canva.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/diversifica_tu_experiencia.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/COMUNICADO_CARNET_UNIVERSITARIO_27.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/COMUNICADO_CARNET_UNIVERSITARIO_28.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/CAPACITACION_DOCENTES_AULA_VIRTUAL.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/ENCUESTA_TU_OPINION_CUENTA.jpeg"></a> -->
+	<a id="kamousagi2" href="imagenes/2025-I/DEFENSORIA_UNIVERSITARIA_UPT_FLYER.png"></a>
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/comunicado_carnet_2025-I_1.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/comunicado_carnet_2025-I_2.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/feria_internacional_1_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/pre_incubacion_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/feria_internacional_2_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/CAPACITACION_ANALISIS_FORMATO_D_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/Curso_Integracion_TIC_Educacion.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/publicacion_silabo_docentes_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/capacitacion_silabo_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/capacitacion_seguimiento_2025-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/CALENDARIO_ACADEMICO_2025-I-03.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/COMUNICADOS_Y_CONVOCATORIAS_2025-11_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/COMUNICADO_BIBLIOTECA_2025_I_2.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/COMUNICADO_AMNISTIA_ACADEMICA_2025-I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/COMUNICADO_PAGO_PENSIONES_2024_II_MODIFICACION_031024-01-01.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2025-I/COMUNICADOS_VACACIONES_INSTITUCIONALES_2025.png"></a> -->
+	<a id="kamousagi2" href="imagenes/2025-I/COMUNICADOS_Y_CONVOCATORIAS_2024_99_99.png"></a>
+	<!-- <a id="kamousagi2" href="imagenes/2024-II/defensoria_2024-II.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-II/CALENDARIO_2025-REC.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-II/Flyer_Experiencias_Exitosas_2024.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-II/COMUNICADOS_Y_CONVOCATORIAS_2024-85.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-II/COMUNICADO_BANCO_2024-II_FINAL.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-II/FLYER_TU_OPINION_CUENTA.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-II/Comunicado_Tesoreria_2.png"></a> -->
+		<!-- <a id="kamousagi2" href="imagenes/2024-II/COMUNICADOS_Y_CONVOCATORIAS_2024-54.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-II/CALENDARIO_ACADEMICO_2024_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/AMPLIACION_CARNE-51.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/FLYER_SIMULACRO_MULTIPELIGRO.jpg"></a> -->
+		<!-- <a id="kamousagi2" href="imagenes/2024-I/COMUNICADO_CE_ULTIMO.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/COMUNICADO_COMITE_46_2024-I_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/CRONOGRAMA_ELECCIONES_ESTUDIANTILES_2024_2025_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/FLYER_PREINCUBACION.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/COMUNICADOS_Y_CONVOCATORIAS_CE_2024_44.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/PUBLICACION_TU_OPINION_CUENTA_2024-I_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/COMUNICADO_CE_COFA_FAING_2024.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/CRONOGRAMA_ELECCIONES_COMPLEMENTARIAS_FAING_DOCENTE_PRINCIPAL.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/comunicado_comite_08_05_2024-I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/capacitacion_formato_d.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/CRONOGRAMA_ELECCIONES_COMPLEMENTARIAS_COFA_FAU_DOCENTE_2023_2025.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/CapacitacionMonitoreo.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/FERREYCORP_MODIFICADO.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/COMUNICADO_IMAGEN_2023-II_61.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/SOPORTE_WEB_08_08.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/COMUNICADOS_Y_CONVOCATORIAS_2024-04-04.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2024-I/COMUNICADO_2023_II_60.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/Afiche_Concurso_Sorteo_ODUN_diciembre_2023.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_BANCOS_59.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_CAJAS_HORARIO_01.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_2023_2_60.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_COBRANZAS_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_IMAGEN.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/vrin_hackathon_mibanco.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_2023_COMITE_ELECTORAL_2_07.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_TALLER_GPAD.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_TU_OPINION_CUENTA.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_ADMA.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_2023_COMITE_ELECTORAL_55_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/CRONOGRAMA_ELECCIONES_ESTAMENTO_DOCENTE_AU_Y_COFA_FACEM_2023_2025.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_2023_COMITE_ELECTORAL_55.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/CRONOGRAMA_ELECCIONES_ESTUDIANTES_COMPLEMENTARIAS.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/CONVOCATORIA_PROGRAMA_MOVILIDAD_ESTUDIANTIL_2023_II.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/FORMATO_COBRANZAS_2023-II-26.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_BIBLIOTECA_CENTRAL_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_EXCEPCIONAL.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_DESCUENTOS_2023-II.jpeg"></a> -->
+
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_TELEFONICA_FAEDCOH_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_TELEFONICA1_FAING_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_TELEFONICA2_FAING_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_TELEFONICA_FADE_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_TELEFONICA_FACSA_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_TELEFONICA1_FACEM_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_TELEFONICA2_FACEM_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/MATRICULA_TELEFONICA_FAU_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/SOPORTE_WEB_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/UNIDAD_DE_COBRANZAS1_2023-II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/UNIDAD_DE_COBRANZAS2_2023-II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/CRONOGRAMA_MATRICULA_2023_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/CALENDARIO_ACADEMICO_SEMESTRE_2023_II.png"></a> -->
+
+	<!-- <a id="kamousagi2" href="imagenes/2023-II/COMUNICADO_VRN_BISA_2023-II.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/COMUNICADO_COMITE_ELECTORAL_DOCENTE_10.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/COMUNICADO_COMITE_ELECTORAL_DOCENTE_08.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CRONOGRAMA_ELECCIONES_DOCENTES_2023.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CHARLA_INFORMATIVA_BECAS_ALIANZA_PACIFICO_2023.jpeg"></a> -->
+	
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/COMUNICADO_COMITE_ELECTORAL.jpeg"></a> -->
+	
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/SEMINARIO_INTERNACIONAL_CATEC.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/FLYER_TU_OPINION_CUENTA_2023.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CRONOGRAMA_ELECCIONES_UPT_2023.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/EPIS_TALLER_DESARROLLO_WEB.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CONVOCATORIA_PROGRAMA_MOVILIDAD_ESTUDIANTIL.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CONTACTOS_UNIDAD_DE_COBRANZAS_2023_I.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/AVISO_EQUIPO_VOLUNTARIO_AUDITORES_INTERNOS.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/COMUNICADO_AMPLIACION_Y_DESCUENTO_2023_I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/COMUNICADO_VRN_BISA_2023-I.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/COMUNICADO_BISA_VRIN_2023_I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/COMUNICADO_ESCALA_DSCTO_2023_I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CALENDARIO_ACADEMICO_2023_I_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/MATRICULA_TELEFONICA_2023_I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/PROCESO_MATRICULA_ONLINE_2023_I_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/BECAS_Y_SUBVENCIONES_2023_I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/SOPORTE_WEB_2023_I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CONTACTOS_UNIDAD_DE_COBRANZAS_2023_I_1.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CONTACTOS_UNIDAD_DE_COBRANZAS_2023_I_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/PASARELA_DE_PAGOS_ONLINE_2023_I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/CALENDARIO_ACADEMICO_FACSA_2023_I.png"></a> -->
+
+	<!-- <a id="kamousagi2" href="imagenes/2023-I/COMUNICADO_BIBLIOTECA_CENTRAL_2023_I.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/VACACIONES.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/COMUNICADO_2022_II_SEMESTRE_15_15.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/COMUNICADO_ACTIVIDADES_PRESENCIALES.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CALENDARIO-2023-REC.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CRONOGRAMA_ELECCIONES_COMPLEMENTARIAS_ESTAMENTO_DOCENTE_FACSA_FAING_FAEDCOH_2022_2023.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/PROGRAMA_CONFERENCIA_2022_II.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/AVISO_DEVOLUCION_LIBROS_2022_II.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/TOMA_FOTOS_CARNET_UNIVERSITARIO_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CONCURSO_PROYECTO_EPIS_2022_II.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CONCURSO_EXPERIENCIAS_EXITOSAS_2022_II.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/TALLER_EMPLEABILIDAD_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CRONOGRAMA_ELECCIONES_COMPLEMENTARIAS_ESTAMENTO_ESTUDIANTIL_FACSA_UPT.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CONCURSO-EPIS.webp"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CATEC-01.webp"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CONCURSO_ENSAYOS_2022_II.webp"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/FLYER_FAEDCOH-01_2022_II.webp"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/FLYER_FAEDCOH-02_2022_II.webp"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/encuesta_gpad_2022_II.webp"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/COMUNICADO_AMPLIACION_PAGO_TERCERA_CUOTA.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/COMUNICADO_NUEVAS_DISPOSICIONES_USO_MASCARILLAS_CARNET_VACUNACION.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CRONOGRAMA_DE_ELECCIONES_COMPLEMENTARIAS_ESTAMENTO_DOCENTE_FACSA.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/ACTIVIDADES_ENSENIANZA_2022_II.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/II_CONCURSO_DE_SEMILLEROS.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/I_CONCURSO_DE_PROYECTOS_DE_INVESTIGACION_FADE_2022.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/COMUNICADO_RECTIFICACION_AMPLIACION_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/ADMISION_2023.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/COMUNICADO_RECTI_2022-II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/RECTIFICACION_MATRICULA_2022_II.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/MATRICULA_EXTEMPORANEA_2022_II.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/COMUNICADO_MATRICULA_AMPLIACION_2022_II.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/INICIO_DE_MATRICULA_ONLINE 1_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CALENDARIO_GENERAL_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CALENDARIO_FACSA_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CALENDARIO_FACSA_2_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/SOPORTE_WEB_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/CONTACTO_COBRANZAS_RECTI_2022-II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/UNIDAD_DE_COBRANZAS_1_2022_II.png"></a>
+	<a id="kamousagi2" href="imagenes/2022-II/UNIDAD_DE_COBRANZAS_2_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/AREA_DE_TESORERIA_ACTUALIZADO_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/AREA_DE_TESORERIA_2022_II.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-II/COMUNICADO_FICHA_DATOS.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/CONCURSO_EPIS.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/JORNADA_PSICOEDUCATIVA_FAEDCOH.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/COMUNICADOPAGO18.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/COMUNICADO_AMPLIACION_MATRICULA-22.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/CATEC_2022-I.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/URGENTE_COMITE_ELECTORAL_DOCENTE_2022-I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/ELECCIONES_COMPLEMENTARIAS_DOCENTES_2022_I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/COMUNICADO_COMITE_ELECTORAL_2022_I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/CRONOGRAMA_ELECCIONES_ESTUDIANTIL_2022-2023.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/TU_OPINION_CUENTA 2022-I.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/COMUNICADO_2022-21.png"></a>
+	<a id="kamousagi2" href="imagenes/2022-I/COMUNICADO_REEEEEE_20_20.png"></a>
+	<a id="kamousagi2" href="imagenes/2022-I/COMUNICADO_DESCUENTOS-10.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/RECTIFICACION_DE_MATRICULA_2022-I.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA_TELEFONICA_2022-I-01.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA_TELEFONICA_2022-I-02.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA_TELEFONICA_2022-I-03.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA_TELEFONICA_2022-I-04.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA_TELEFONICA_2022-I-05.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA_TELEFONICA_2022-I-06.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA_TELEFONICA_2022-I-07.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA_TELEFONICA_2022-I-08.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I-01.png"></a>
+	<a id="kamousagi2" href="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I-01.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/MATRICULA ONLINE 2022-I-01.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I- MEDICINA HUMANA-02.png"></a>
+	<a id="kamousagi2" href="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I-03.png"></a>
+	<a id="kamousagi2" href="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I-04.png"></a> -->
+<!-- <a id="kamousagi2" href="imagenes/COMUNICADO-DESCUENTOS-2021.jpg"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/EL_SOFTWARE_LIBRE_EN_EL_MUNDO_DE_HOY.jpg"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/CALENDARIO_RECUPERACION_NIVELACION_2022.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/COMUNICADO-DESCUENTOS-2021-2.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/XIX_CONCURSO_PROYECTOS_EPIS.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/CALENDARIO_2021-I.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/RECTIFICACION_RECUPERACION.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/RECTIFICACION_NUMEROS.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_FEB_2021.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/CALENDARIO-RECUPERACION-2021.jpg"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO-04.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/CAPACITACION_JAMBOARD.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/OPINION.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/SUSI2022.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/SEMINARIO_POSTGRADO.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/APORTES_PSICO.png"> -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_1.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_2.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/CATEC2021II.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/CRONOGRAMA_FADE21.jpg"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/CRONOGRAMA_DOC21.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/PROG_CONTEST.jpg"></a> -->
+
+	<!-- <a id="kamousagi2" href="imagenes/ACADEMIA2022.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/FAEDCOH-01.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/CURSO_WEB.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/XI_CONCURSO_EXPERIENCIAS.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/FREEDOM_DAY.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/CONVOCATORIA_FADE.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/CONVOCATORIA.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_COMITE_ELECTORAL.png"></a> -->
+
+
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/CRONOGRAMA-CE-01.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/CONCURSO_PROYECTOS_VRIN_2021.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/COMUNICADO-DESCUENTOS-2021.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/COMUNICADO-INGRESANTES-MATRICULA.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/CALENDARIO-GENERAL-01.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/CALENDARIO-FACSA-03.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/CALENDARIO-FACSA-08.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/CALENDARIO-FACSA-07.png"></a>  -->
+
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/CONTACTANOS.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/NUEVOS_ANEXOS_COBRANZAS_22.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/UNIDAD DE COBRANZAS 2022-I-13.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/UNIDAD DE COBRANZAS 2022-I-14.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/PASARELA-PAGOS.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/PASARELA DE PAGOS 2022-I-12.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-II/SOPORTE-WEB.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/2022-I/SOPORTE WEB-06.png"></a> -->
+
+	<!-- <a id="kamousagi2" href="imagenes/ASESORES-MATRICULA-2021-I/ASESORES-MATRICULA-01.png"></a>
+	<a id="kamousagi2" href="imagenes/ASESORES-MATRICULA-2021-I/ASESORES-MATRICULA-02.png"></a>
+	<a id="kamousagi2" href="imagenes/ASESORES-MATRICULA-2021-I/ASESORES-MATRICULA-03.png"></a>
+	<a id="kamousagi2" href="imagenes/ASESORES-MATRICULA-2021-I/ASESORES-MATRICULA-04.png"></a>
+	<a id="kamousagi2" href="imagenes/ASESORES-MATRICULA-2021-I/ASESORES-MATRICULA-05.png"></a>
+	<a id="kamousagi2" href="imagenes/ASESORES-MATRICULA-2021-I/ASESORES-MATRICULA-06.png"></a>
+	<a id="kamousagi2" href="imagenes/ASESORES-MATRICULA-2021-I/ASESORES-MATRICULA-07.png"></a>
+	<a id="kamousagi2" href="imagenes/ASESORES-MATRICULA-2021-I/ASESORES-MATRICULA-08.png"></a>
+
+	<a id="kamousagi2" href="imagenes/CURSO-INTERNACIONAL-RSU.png"></a> -->
+
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO-DESCUENTOS-2021.jpg"></a>
+	<a id="kamousagi2" href="imagenes/2021-I/MATRICULA-FAEDCOH.jpg"></a>
+	<a id="kamousagi2" href="imagenes/2021-I/MATRICULA-FAING.jpg"></a>
+	<a id="kamousagi2" href="imagenes/2021-I/MATRICULA-FADE.jpg"></a>
+	<a id="kamousagi2" href="imagenes/2021-I/MATRICULA-FACSA.jpg"></a>
+	<a id="kamousagi2" href="imagenes/2021-I/MATRICULA-FACEM.jpg"></a>
+	<a id="kamousagi2" href="imagenes/2021-I/MATRICULA-FAU.jpg"></a>  -->
+
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_VRAC.jpeg"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO-TESO-04.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO-CE-2021.jpg"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/AFICHE-CATEC-2021-I.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/CAMPANIA-MESA-TRABAJO-2021.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_ALTO_ALIANZA_2021.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_SUSPENSION_LABORES_2021.jpeg"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_ELECCIONES_GENERALES.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/CURSO_TALLER_DESARROLLO_WEB_EPIS_2021.png"></a> -->
+			<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_ESPG_INVITACION_2021.jpg"></a> -->
+	
+	<!-- <a id="kamousagi2" href="imagenes/CONCURSO_PROYECTOS_2021.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/CONCURSO_PROYECTOS_EPIS_2021.jpeg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/COMITE_ELECTORAL_DOCENTE_2021.png"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO_CONVOCATORIA_ESTUDIANTES.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/ELECCIONES_2021_2.png"></a>  -->
+		<!-- <a id="kamousagi2" href="imagenes/TU_OPINION_CUENTA_2021_I.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/CARNE-UNIVERSITARIO-2021.jpg"></a> -->
+	<!-- <a id="kamousagi2" href="imagenes/ENCUENTRO-EGRESADOS-2021.jpg"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/EMPLEABILIDAD-2021.jpg"></a>  -->
+
+	<!-- <a id="kamousagi2" href="imagenes/CALENDARIO_2021-I.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/COMUNICADO-DESCUENTOS-2021.jpg"></a>  -->
+
+	<!-- <a id="kamousagi2" href="imagenes/TESORERIA-CONTACTO.png"></a>  -->
+	<!-- <a id="kamousagi2" href="imagenes/2021-I/PASARELA-PAGOS-ONLINE.jpg"></a>  -->
+
+	<!-- <a id="kamousagi2" href="imagenes/CALENDARIO-RECUPERACION-2021.jpg"></a>  -->
+
+</div>
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO_AMPLACION_5TA_2021.png"></a>  -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COBRANZAS-02.png"></a>  -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/concurso_gpad_2020.png"></a>  -->
+		<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/epis_catec.jpg"></a>  -->
+<!--  	<a id="kamousagi" rel="prettyPhoto" href="imagenes/ALAOPINION.jpg" style="display: none;"></a> -->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/comuniantiv1.jpg" style="display: none;"></a>-->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/comunicado-actualizardni.jpg" style="display: none;"></a>-->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/docente_univ.jpg" style="display: none;"></a>-->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/matriculacomusweb-2017-I.png" style="display: none;"></a>-->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/_final_matricula.png" style="display: none;"></a>-->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/matriculas-2017-I.png" style="display: none;"></a>-->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/carnet_2017_.jpg" style="display: none;"></a>-->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/Comunicado_Matricula_Web_II.png" style="display: none;"></a>-->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/Comunicado_Jefa.png" style="display: none;"></a>-->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/comunicadomatweb-2018-II.png" style="display: none;"></a> -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO_MATRICULAWEB_2019_I_3.png" style="display: none;"></a> -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/CARNET_2019.png" style="display: none;"></a> -->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO_2019-II.png" style="display: none;"></a> -->
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/Comunicado_MatWeb_2019-II.png" style="display: none;"></a> -->
+
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO_MATRICULAWEB_2020-I.png" style="display: none;"></a> -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO-MATRICULA-2020-I-COVID.png" style="display: none;"></a> -->
+
+<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/CALENDARIO_ACADEMICO_2020_I.png" style="display: none;"></a> -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/carnet20182019.png" style="display: none;"></a> -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/AvisoEncuestaGPAD_1.png" style="display: none;"></a>-->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/SorteoPuntaSal.jpg" style="display: none;"></a> -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/CAPACITACION_ESTUDIANTE_NO_PRESENCIAL.jpg" style="display: none;"></a> -->
+<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO-AULAVIRTUAL-3.jpg" style="display: none;"></a> -->
+
+
+
+
+
+
+	<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO_CARNET_2018_II.jpg" style="display: none;"></a> -->
+	<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/ELECCIONES_2018_2019.png" style="display: none;"></a> -->
+
+	<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO_MORAS_2019.jpg" style="display: none;"></a> -->
+
+
+
+	
+
+		<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/COMUNICADO_MATRICULAWEB_2019_I_2.png" style="display: none;"></a> -->
+	
+
+
+<!-- PARA FACSA POPUP 21-08-2015 -->
+
+
+	<!-- <a id="kamousagi" rel="prettyPhoto" href="imagenes/AvisoBeca.jpg" style="display: none;"></a>-->
+	<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/curso_aulas_virtuales.jpg" style="display: none;"></a>-->
+	<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/Comunicado_estudiantes.jpg" style="display: none;"></a> -->
+	<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/carnetuniv_2015-2016.jpg" style="display: none;"></a> -->
+	<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/comuniantiv1.jpg" style="display: none;"></a>-->
+	<!--<a id="kamousagi" rel="prettyPhoto" href="imagenes/aviso.jpg" style="display: none;"></a> -->
+
+
+<link href="site.css" type="text/css" rel="stylesheet"><link href="fontawesome-all.css" type="text/css" rel="stylesheet"><div id="root-row"><table border="0" width="100%" cellspacing="0" cellpadding="0" style="padding-top:2px;"><tr><td ><font style="font-size:19px;" color="white">&nbsp;&nbsp;Net.UPT.edu.pe</font></td><td><font color="white" style="font-size:12px;"><strong>Usuario:</strong> FUENTES AVALOS, SEBASTIAN NICOLAS</font></td><td><div id="crumbsx" style="font-size:15px;"><a href="#">Ayuda <i class="fas fa-question-circle"></i></a>&nbsp;&nbsp;&nbsp;<a href="logout.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" >Finalizar <i class="fas fa-arrow-alt-circle-right"></i></a>&nbsp;&nbsp;&nbsp;<span id="hora_total">
+	<strong><i class="fas fa-clock"></i> Hora del sistema: <span id="div_hora">23:15:50</span></strong>
+</span>
+
+<style type="text/css">
+	#hora_total{
+		color: #fff;
+		font-size: 70%;
+	}
+	#div_hora{
+		/* font-weight:bold; */
+	}
+</style>
+
+<script language="javascript" type="text/javascript">
+	
+	function padNmb(nStr, nLen){
+	var sRes = String(nStr);
+	var sCeros = "0000000000";
+	return sCeros.substr(0, nLen - sRes.length) + sRes;
+	}
+	
+	function stringToSeconds(tiempo){
+	var sep1 = tiempo.indexOf(":");
+	var sep2 = tiempo.lastIndexOf(":");
+	var hor = tiempo.substr(0, sep1);
+	var min = tiempo.substr(sep1 + 1, sep2 - sep1 - 1);
+	var sec = tiempo.substr(sep2 + 1);
+	return (Number(sec) + (Number(min) * 60) + (Number(hor) * 3600));
+	}
+	
+	function secondsToTime(secs){
+	var hor = Math.floor(secs / 3600);
+	var min = Math.floor((secs - (hor * 3600)) / 60);
+	var sec = secs - (hor * 3600) - (min * 60);
+	return padNmb(hor, 2) + ":" + padNmb(min, 2) + ":" + padNmb(sec, 2);
+	}
+	
+	function substractTimes(t1, t2){
+	var secs1 = stringToSeconds(t1);
+	var secs2 = stringToSeconds(t2);
+	var secsDif = secs1 + secs2;
+	return secondsToTime(secsDif);
+	}
+	
+	function calcT3(){
+		horita = substractTimes(document.getElementById('div_hora').innerHTML, "00:00:01");
+		if (horita=="24:00:00")
+			horita = "00:00:00";
+		document.getElementById('div_hora').innerHTML = horita;
+	}
+setInterval("calcT3()", 1000);
+</script></div></td></tr></table></div><div id="root-row2"><div id="crumbs"> </div></div><div id="nav"><div id="menu-block"><a class="menuy1" href="inicio.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy"><i class="fas fa-angle-right"></i> Inicio</a><div id="side-block"></div><a class="menux1" href="Academico/complements/local.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" target="_blank"><i class="fas fa-angle-right"></i> ACADÉMICO</a><div id="side-block"></div><a id="various6" class="menuy1" href="#inline11"><i class="fas fa-angle-right"></i> Google Workspace <i class="fas fa-star" style="padding: 3px; font-size: 11px; color:#ECA815;"></i></a><div style="display: none; border-radius: 30px;">	<div id="inline11" style="width:450px;height:480px;overflow:auto;padding: 10px;" >		<div style="padding-top: 14px; padding-bottom: 0px;	margin-bottom: -16px; "><center><strong style="text-transform: uppercase; color: #9a4f03;">Acceso Plataforma Google Workspace</strong></center></div>		<br>		<div id="div_mensaje_copiado" style="display: none; background: rgb(173 222 175);padding: 10px;border: 1px #85a979 solid;border-radius: 5px;margin-bottom: -7px; margin-top: 9px; text-align: center;font-size: 13px;"><strong>Correo electrónico</strong> copiado!</div>		<h5 style="margin-bottom:0px; text-transform: uppercase; border-bottom: 1px solid #9e9e9e;">Correo electrónico</h5>		<div id="div_google_correo" style="text-align:center; margin: 8px; font-weight:100; border: 1px solid #ccc; padding: 6px; border-radius: 5px; float:left; width:60%;">sf2022073902@virtual.upt.pe</div>		<button class="button_intranet" style="margin: 9px; width: 28%;	padding: 9px;	border-radius: 5px;" onclick="fncCopiarTextoDiv('div_google_correo', 'Correo electrónico', 'div_mensaje_copiado');"><i class="fas fa-copy"></i> Copiar</button>		<h5 style="margin-bottom:0px; text-transform: uppercase; border-bottom: 1px solid #9e9e9e;">Contraseña</h5>		<div id="div_google_contrasenia" style="text-align:center; margin: 8px; font-weight:100; border: 1px solid #ccc; padding: 6px; border-radius: 5px; float:left; width:60%;">1fe.Aeb1</div>		<button class="button_intranet" style="margin: 9px; width: 28%;	padding: 9px;	border-radius: 5px;" onclick="fncCopiarTextoDiv('div_google_contrasenia', 'Contraseña', 'div_mensaje_copiado');"><i class="fas fa-copy"></i> Copiar</button>		<img src="/imagenes/google-workspace.jpg" width="100%" style="position: absolute; left: 0px; bottom: 13px;" />	</div></div><div id="side-block"></div><a class="menux1" href="microsite/index_live.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" target="_blank"><i class="fas fa-angle-right"></i> Office365@Edu</a><div id="side-block"></div><a   class="menux1" href="https://azure.microsoft.com/es-es/features/azure-portal/" target="_blank"><i class="fas fa-angle-right"></i> Convenio Microsoft</a> <p><div id="side-block"></div><a class="menuy1" href="elecciones.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" target="_blank" style="padding-top:10px;padding-bottom:10px;"><i class="fas fa-angle-right"></i> ELECCIONES</a><div id="side-block"></div><a class="menuy1" href="pasarela.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" target="_blank" style="padding-top:10px;padding-bottom:10px;"><i class="fas fa-angle-right"></i> PASARELA</a><div id="side-block"></div><a class="menux1" href="alumno.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy"><i class="fas fa-angle-right"></i> Alumno</a><div id="side-block"></div><a class="menux1" href="https://aula.upt.edu.pe/login/index.php" target="_blank"><i class="fas fa-angle-right"></i> Aula Virtual</a><div id="side-block"></div><a class="menuy1" href="Academico/complements/local.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" target="_blank"><i class="fas fa-angle-right"></i> GPS ALUMNI</a><div id="side-block"></div><a class="menux1" href="reporte_comprobantesElectronicos.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" target="_blank"><i class="fas fa-angle-right"></i> Comprobantes Electrónicos</a><br><div id="side-block"></div><a class="menux1" href="biblioteca.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" target="_blank"><i class="fas fa-angle-right"></i> Biblioteca</a><div id="side-block"></div><a id="various2"  class="menux1" href="#inline2"><i class="fas fa-angle-right"></i> Seguro Estudiantil</a></br><div style="display: none;"><div id="inline2" style="width:720px;height:250px;overflow:auto;background-image:url(imagenes/fondo.jpg);" ><center><strong>INFORMACION DEL SEGURO</strong></center><br><br><li><a  href="https://net.upt.edu.pe/documentos/INFORMACION_BASICA_DEL_SEGURO_ESTUDIANTIL.pdf" target="_blank">Información básica del Seguro de Accidentes Personales<blink> <font size="1" color="#FF0000">(Descargar) </font></blink> </a></li><br><br><li><a  href="https://net.upt.edu.pe/documentos/PROGRAMA_DE_PROTECCION_DE_ACCIDENTES_ESTUDIANTILES.pdf" target="_blank">Programa de Protección de Accidentes Estudiantiles (Cobertura)<blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a></li><br><br><li><a  href="https://net.upt.edu.pe/documentos/HOJA_DE_DENUNCIA_DE_ACCIDENTES.pdf" target="_blank">Hoja de denuncia de Accidentes<blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a></li></div></div><div id="side-block"></div><a id="various4"  class="menux1" href="#inline4"><i class="fas fa-angle-right"></i> Recorrido de Buses</a><br style="line-height:4px;"><div style="display: none;"><div id="inline4" style="width:600px;height:170px;overflow:auto;background-image:url(imagenes/fondo.jpg);" ><center><strong>Recorrido de Buses</strong></center><br><br><li><a  href="https://net.upt.edu.pe/documentos/2023-I/RUTA_A_UPT.pdf" target="_blank">Recorrido de la Ruta A<blink> <font size="1" color="#FF0000">(Descargar) </font></blink> </a></li><br><br><li><a  href="https://net.upt.edu.pe/documentos/2023-I/RUTA_B_UPT.pdf" target="_blank">Recorrido de la Ruta B<blink> <font size="1" color="#FF0000">(Descargar) </font></blink> </a></li></div></div><br><div id="side-block"></div><a id="various1"  class="menux1" href="#inline1"><i class="fas fa-angle-right"></i> Reglamento y Directivas</a><div style="display: none;"><div id="inline1" style="width:800px;height:320px;overflow:auto;background-image:url(imagenes/fondo.jpg);" ><center><strong>Reglamentos</strong></center><br><li><a  href="https://net.upt.edu.pe/documentos/2023-I/DIRECTIVA_Nro_002_2023_REDO_DIGA.pdf" target="_blank">Directiva para la gestión de pagos por derecho de enseñanza en la Universidad Privada de Tacna <blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a> <span style="background: #880606;padding: 4px 10px 5px 10px;font-size:9px;color: white;font-weight: bold;">Nuevo</span></li><br><li><a  href="https://net.upt.edu.pe/documentos/reglamento_general_upt.pdf" target="_blank">Reglamento General de la Universidad Privada de Tacna <blink> <font size="1" color="#FF0000">(Descargar) </font></blink> </a></li><br><li><a  href="https://net.upt.edu.pe/documentos/estatuto.pdf" target="_blank">Estatuto de la Universidad Privada de Tacna - Edici&oacute;n 2014  <blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a></li><br><li><a  href="https://net.upt.edu.pe/documentos/Reglamentos_Directivas/REGLAMENTO_MATRICULA_ESTUDIOSYEVALUACION_2020.pdf" target="_blank"> Reglamento de Matricula Estudios y Evaluación  <blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a> <span style="background: #880606;padding: 4px 10px 5px 10px;font-size:9px;color: white;font-weight: bold;">Nuevo</span> </li><br><li><a  href="https://net.upt.edu.pe/documentos/REGLAMENTO_GRADOS-TITULOS_AGOSTO_2015.pdf" target="_blank"> Reglamento General de Grados y Títulos de la Universidad Privada de Tacna  <blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a></li><br><li><a  href="https://net.upt.edu.pe/documentos/REGLAMENTO_DIPLOMADO_ POSTGRADO_setiembre_2015.pdf" target="_blank"> Reglamento de Diplomado de Post Grado de la Universidad Privada de Tacna  <blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a></li><br><li><a  href="https://net.upt.edu.pe/documentos/EXPEDICION_DOCUMENTOS_OFICIALES_EN_SECRETARIA_GENERAL_2015.pdf" target="_blank"> Reglamento para la Expedición de Documentos Oficiales por la Oficina de Secretaría General de la Universidad Privada de Tacna  <blink><font size="1" color="#FF0000">(Descargar) </font></blink> </a></li><br></div></div><br><div id="side-block"></div><a class="menux1" href="https://net.upt.edu.pe/documentos/BecasySubvenciones.pdf" style="line-height:15px;" target="_blank"><i class="fas fa-angle-right"></i> Becas y Subvenciones</a><br><div id="side-block"></div><br><br><div id="side-block"></div><span class="menuy1" color=#999900;"><strong style="margin-left:12px;">ANUNCIOS</strong></span><div id="side-block"></div><a id="example11" class="menux1" target="_blank" href="https://drive.google.com/file/d/1ujafu6x0Jf1jJ0o7Q4vzuFRDVE5cpkZ4/view"><font style="margin-left:4px;">Gu&iacute;a Estudiante</font></a><div id="side-block"></div><a id="example1" class="menux1" href="imagenes/afiche_office365.png"><font style="margin-left:4px;">¿Office365@Edu?</font></a><div id="side-block"></div><a id="example3" class="menux1" href="imagenes/afiche_importancia.png"><font style="margin-left:1px;">C. Institucional</font></a><div id="side-block"></div><a class="menux1" href="veritrade/index.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy"><font style="margin-left:1px;">Veritrade</font></a><div id="side-block"></div><a class="menux1" href="https://net.upt.edu.pe/documentos/2025-II/COSTO_DEL_CREDITO_2025-I_Y_2025-II_PREGRADO.pdf" target="_blank"><font style="margin-left:0px;">Valor del Crédito</font></a><br style="line-height:15px;"><div id="side-block"></div></div></div><div id="contents" style="top:65px; width: 74%;"><form method="POST" action="inicio.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" name="frminicio"><input type="hidden" name="op" maxlength="7" value="1"><table border="0" width="100%">
+
+ 	<tr>
+		<td colspan="2">
+			<h2 style="color: #ECA815;">
+				Bienvenido a
+				<!-- <font color="navy" size="4">Net.UPT.edu.pe - SERVIDOR DE PRUEBA</font> <font color="navy"> -->
+				<font color="navy" size="4">Net.UPT.edu.pe</font> 				<font color="navy">
+					<font size="2">versi&oacute;n 1.5  </font>
+					<font size="1"> by Of. Tecnolog&iacute;as de la Informaci&oacute;n</font>
+				</font>
+			</h2>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<hr style="border-top: 3px double #8c8b8b; border-color: #102368; margin-top: 2px;" />
+			<!-- <br> -->
+		</td>
+	</tr>
+
+	<tr><td>&nbsp;</td></tr>
+	
+	<tr>
+		<td>
+			<h4 style="color: #7D7C7C; margin-top: 4px; margin-bottom: 4px;  font-size: 14px; font-size: 14px;">
+				INFORMACI&Oacute;N
+				<hr class="style17" />
+			</h4>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+
+			<div style="line-height: 20px;"><font color="#000000" size="2"><strong>¿Tienes problemas con la Intranet?</strong> , entonces escríbenos a <strong><a href="mailto:intranet@upt.pe">intranet@upt.pe</a></strong> enviando tu código universitario y datos personales.<br><font color="#000000" size="2"><strong>¿Tienes problemas con tu cuenta de Correo Institucional Live@Edu?</strong> , entonces escríbenos a <strong><a href="mailto:soporte365@upt.pe">soporte365@upt.pe</a></strong> enviando tu código universitario y datos personales.<br><font color="#000000" size="2"><strong>¿Tienes problemas con tu cuenta de Google?</strong> , entonces escríbenos a <strong><a href="mailto:soportegsuite@virtual.upt.pe">soportegsuite@virtual.upt.pe</a></strong> enviando tu código universitario y datos personales.</div>
+<!--
+-->
+		<!--<a href="http://www.upt.edu.pe/odesar/encuesta/iiicurso/index.html" target="_blank">III Curso Taller Aula Virtual</a>-->
+		<br />
+		</td>
+	</tr>
+<tr><td>&nbsp;</td></tr>
+<!--<tr><td ><a href="http://net.upt.edu.pe/matricula/pasosmatricula.htm" target="_blank"><b><font color="navy">Infórmate como puedes Matriculate via Internet </font><font color="navy" size="1"> </font><font size="2"  id="tosca" class="lin0" >Haga clic aquí </font></b></a></td></tr>-->
+<!--<tr><td ><a href="http://net.upt.edu.pe/matricula/pca.pdf" target="_blank"><b><font color="navy">Infórmese acerca del procedimiento de control de asistencia </font><font color="navy" size="1"> </font><font size="2"  id="tosca" class="lin0" >Haga clic aquí </font></b></a></td></tr>-->
+
+<!--<tr><td ><b><font size="2"  id="tosca" class="lin0" >Ingresar a tu Aula Virtual </font></b><a href="Elearning.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy" target="_blank"><b><font color="#003399">Elearnig.UPT.edu.pe </font><font color="#003399" size="1"></font></b></a></td></tr>-->
+<!-- <tr><td><font size="2">Nota: use el mismo codigo y clave que uso para entrar aquí.</font></td></tr> -->
+
+		<!--
+	<tr>
+		<td colspan="2">Esta versión incluye mejoras de seguridad y también
+		simplifica más su uso;</td>
+	</tr>
+	<tr>
+		<td colspan="2">siempre que tenga alguna duda acerca del funcionamiento
+		de la pagina, </td>
+	</tr>
+		<tr>
+		<td colspan="2">déle un click al icono de ayuda, que esta en la parte superior
+		derecha.</td>
+	</tr>
+	<tr>
+		<td colspan="2"><font color="#FF0000">Nota:</font> no se olvide de
+		finalizar su sesión cuando acabe de usar la pagina, </td>
+	</tr>
+	<tr>
+		<td colspan="2">con&nbsp; un click en el icono finalizar que esta a lado
+		del de ayuda.</td>
+	</tr>
+	-->
+			<tr>
+		<td style="color:white; background:#102368;">
+				<!-- <hr class="style17blue"> -->
+			<h4 style="margin: 5px 10px; font-size: 14px; font-size: 14px;">
+				ACTIVA TU CORREO INSTITUCIONAL UPT.PE hasta el 20/09/2025  
+				<a style="color: #c7d3f3ff;" target="_blank" href="microsite/index_live.php?sesion=gb2N2HOpAv4DsPGliLOTU5c5Ejs3E9q">Ingrese aquí</a>
+				(Solo para estudiantes ingresantes)
+				<!-- <hr class="style17blue"> -->
+			</h4>
+		</td>
+	</tr>
+		<!-- <tr><td></td></tr> -->
+	<tr>
+		<td colspan="2">
+			</br>      <span style="font-size:12px;"> <strong>Su cuenta de correo personal es: </strong></span>
+			<INPUT TYPE="text" NAME="email" id="input_email" maxlength="50" value="fuentessebastiansa4s@gmail.com" style="border:1px solid #C0C0C0; background-color: #F2F8FC; width: 201px; padding: 2.5px" autocomplete="off" >
+							<button TYPE="submit" ONCLICK="return isEmailAddress(email,'email', false)" class="button_intranet"><i class="fas fa-save"></i> Cambiar Email</button>
+				<!-- <INPUT TYPE="submit" VALUE="Cambiar Email" ONCLICK="return isEmailAddress(email,'email', false)"> -->
+			     	<p><span style="font-size:12px;"> <strong>Seleccione el bot&oacute;n si desea cambiar su contrase&ntilde;a de la Intranet: </strong></span>
+     		<button type="button" class="button_intranet" style="margin-left: 9px;" onClick="javascript:location.href='cambio.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy'"><i class="fas fa-unlock-alt"></i> Cambiar Contrase&ntilde;a</button>
+     		<!-- <input type=button value="Cambiar Contrase&ntilde;a" onClick="javascript:location.href='cambio.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy'">         -->
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td>
+
+			
+			<table width="100%" border="0">
+
+				<tr>
+					<td width="70%" valign="top">
+
+						<table width="100%" border="0">
+							<tr>
+								<td>
+									<h4 style="color: #7D7C7C; margin-top: 4px; margin-bottom: 4px; font-size: 14px;">
+										&Uacute;LTIMOS ACCESOS
+										<hr class="style17" />
+									</h4>
+								</td>
+							</tr>
+							<tr><td colspan="2"><font size="2">Domingo 23 Noviembre del 2025  10:49PM&nbsp;-</font></td></tr><tr><td colspan="2"><font size="2">Domingo 23 Noviembre del 2025  10:49PM&nbsp;-</font></td></tr><tr><td colspan="2"><font size="2">Domingo 23 Noviembre del 2025   5:30PM&nbsp;-</font></td></tr><tr><td colspan="2"><font size="2">Domingo 23 Noviembre del 2025  11:20AM&nbsp;-</font></td></tr>
+							<table width="100%">								<tr>
+									<td colspan="2">&nbsp;
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h4 style="color: #7D7C7C; margin-top: 4px; margin-bottom: 4px;  font-size: 14px;">
+											INFORMACI&Oacute;N ECON&Oacute;MICA
+											<hr class="style17" />
+										</h4>
+									</td>
+								</tr>
+							<tr><td><table  width="100%" class="GeneratedTable">
+		<thead>
+			<tr>
+				<th><font style="font-size:12px;"> <strong>Nro</strong> </font></th>
+				<th><font style="font-size:12px;"> <strong>Descripción</strong> </font></th>
+				<th><font style="font-size:12px;"> <strong>Monto</strong> </font></th>
+				<th><font style="font-size:12px;"> <strong>Vence</strong> </font></th>
+				<th><font style="font-size:12px;"> <strong>Dependencia</strong> </font></th>
+				<th><font style="font-size:12px;"> <strong>Semestre</strong> </font></th>
+			</tr>
+		</thead><tbody><tr><td colspan="6" align="center"><font style="font-size:13px;">No tiene deuda hasta la fecha</font></td></tr></tbody><table></td></tr>
+							<tr><td colspan='4'><br/><font style="font-size:12px;"> <strong>Deuda Libro: </strong> </font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/><table width="100%"><tr><td colspan="4"><font style="font-size:12px;">No tiene deuda de libro hasta la fecha</font></td></tr></table></td></tr></table>
+						</table>
+
+					</td>
+
+										<td width="30%" valign="top">
+
+						<table width="100%" border="0">
+
+							<tr>
+								<td>
+									<h4 style="color: #7D7C7C; margin-top: 4px; margin-bottom: 4px; font-size: 14px;">
+										CALENDARIOS ACAD&Eacute;MICOS
+										<hr class="style17" />
+									</h4>
+								</td>
+							</tr>
+							<tr>
+								<td>
+
+									<style>
+										.demo1 a {text-decoration:none;color:#222;}
+										.full-width {float:left;width:100% !important;}
+										.demo1 h1 {text-align:center;padding:15px 0;}
+										.demo1 {width: 310px;margin:0 auto;display:block; /*background:#eee;*/ border: 1px solid; position: relative;}
+										.demo1 p {padding:10px 15px;font-size:15px;line-height:22px;}
+										.demo01, .demo02, .demo03, .demo04 {
+											font-size: 16;
+											font-weight: bold;
+											padding: 10px;
+											background: #ddd;
+											text-align: center;
+											border: 1px solid white;
+										}
+										.demo01 i {
+											text-align: right;
+											position: absolute;
+											right: 0;
+											padding-right: 15px;
+										}
+									</style>
+
+									<div class="demo1">
+
+										<a href="#"><div class="demo01 expander">2025 - II<i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2025-I/Calendario_Academico_2025-II_Nuevo.jpg" target="_blank">
+												<img src="imagenes/2025-I/Calendario_Academico_2025-II_Nuevo.jpg" width="100%" alt="">
+											</a>
+										</p>
+
+										<a href="#"><div class="demo01 expander">2025 - INT<i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2025-I/CALENDARIO_INTERNADO_2025.jpg" target="_blank">
+												<img src="imagenes/2025-I/CALENDARIO_INTERNADO_2025.jpg" width="100%" alt="">
+											</a>
+										</p>
+
+										<a href="#"><div class="demo01 expander">2026 - REC<i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2026-I/Calendario_Academico_Recuperacion_y_Nivelacion_Academica_2026-REC.jpg" target="_blank">
+												<img src="imagenes/2026-I/Calendario_Academico_Recuperacion_y_Nivelacion_Academica_2026-REC.jpg" width="100%" alt="">
+											</a>
+										</p>
+
+										<a href="#"><div class="demo01 expander">2026 - I<i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2026-I/Calendario_Academico_Semestre_2026-I.jpg" target="_blank">
+												<img src="imagenes/2026-I/Calendario_Academico_Semestre_2026-I.jpg" width="100%" alt="">
+											</a>
+										</p>
+
+										<a href="#"><div class="demo01 expander">2026 - II<i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2026-I/Calendario_Academico_Semestre_2026-II.jpg" target="_blank">
+												<img src="imagenes/2026-I/Calendario_Academico_Semestre_2026-II.jpg" width="100%" alt="">
+											</a>
+										</p>
+
+										<!-- <a href="#"><div class="demo01 expander">2023-REC <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2023-I/CALENDARIO_ACADEMICO_2023_REC.jpg" target="_blank">
+												<img src="imagenes/2023-I/CALENDARIO_ACADEMICO_2023_REC.jpg" width="100%" alt="">
+											</a>
+										</p> -->
+										<!-- <a href="#"><div class="demo01 expander">2023-REC-FACSA <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2023-I/CALENDARIO_ACADEMICO_2023_REC_FACSA.jpg" target="_blank">
+												<img src="imagenes/2023-I/CALENDARIO_ACADEMICO_2023_REC_FACSA.jpg" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2024 - REC <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2024-I/CALENDARIO_ACADEMICO_2024-REC.jpg" target="_blank">
+												<img src="imagenes/2024-I/CALENDARIO_ACADEMICO_2024-REC.jpg" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2024 <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2024-I/CALENDARIO_ACADEMICO_2024-I_Y_2024-II.jpg" target="_blank">
+												<img src="imagenes/2024-I/CALENDARIO_ACADEMICO_2024-I_Y_2024-II.jpg" width="100%" alt="">
+											</a>
+										</p> -->
+
+                                        <!-- <a href="#"><div class="demo01 expander">2024 - XII - MH <i class="fas fa-angle-left"></i></div></a>
+                                        <p class="text">
+                                            <a rel="prettyPhoto"  href="imagenes/2024-I/CALENDARIO_2024-II_XII_MH_FACSA.jpg" target="_blank">
+                                                <img src="imagenes/2024-I/CALENDARIO_2024-II_XII_MH_FACSA.jpg" width="100%" alt="">
+                                            </a>
+                                        </p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2024 - INT <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2024-II/CALENDARIO_INTERNADO_FACSA.jpg" target="_blank">
+												<img src="imagenes/2024-II/CALENDARIO_INTERNADO_FACSA.jpg" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2025 - REC <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2024-II/CALENDARIO_2025_REC.jpg" target="_blank">
+												<img src="imagenes/2024-II/CALENDARIO_2025_REC.jpg" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2023 <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2023-I/CALENDARIO_ACADEMICO_2023.jpg" target="_blank">
+												<img src="imagenes/2023-I/CALENDARIO_ACADEMICO_2023.jpg" width="100%" alt="">
+											</a>
+										</p> -->
+										<!-- <a href="#"><div class="demo01 expander">2023-FACSA <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2023-I/CALENDARIO_ACADEMICO_FACSA_2023.png" target="_blank">
+												<img src="imagenes/2023-I/CALENDARIO_ACADEMICO_FACSA_2023.png" width="100%" alt="">
+											</a>
+										</p> -->
+										<!-- <a href="#"><div class="demo01 expander">2023 - INT - FACSA <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2023-I/CALENDARIO_ACADEMICO_2023_INTERNADO_FACSA.png" target="_blank">
+												<img src="imagenes/2023-I/CALENDARIO_ACADEMICO_2023_INTERNADO_FACSA.png" width="100%" alt="">
+											</a>
+										</p> -->
+										<!-- <a href="#"><div class="demo01 expander">2021-REC <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/CALEN_2021_REC.jpg" target="_blank">
+												<img src="imagenes/CALEN_2021_REC.jpg" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2021-I <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/CALEN_2021_I.png" target="_blank">
+												<img src="imagenes/CALEN_2021_I.png" width="100%" alt="">
+											</a>
+										</p>  -->
+
+										<!-- <a href="#"><div class="demo01 expander">2021-II <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/CALEN_2021_II.png" target="_blank">
+												<img src="imagenes/CALEN_2021_II.png" width="100%" alt="">
+											</a>
+										</p>  -->
+
+										<!-- <a href="#"><div class="demo01 expander">2022-REC <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2022-I/CALENDARIO_ACADEMICO_REC_2022.png" target="_blank">
+												<img src="imagenes/2022-I/CALENDARIO_ACADEMICO_REC_2022.png" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2022-I <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I.png" target="_blank">
+												<img src="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I.png" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2022-I <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2022-I/CALENDARIO_ACADEMICO_SEMESTRE_2022-I_NUEVO_2.png" target="_blank">
+												<img src="imagenes/2022-I/CALENDARIO_ACADEMICO_SEMESTRE_2022-I_NUEVO_2.png" width="100%" alt="">
+											</a>
+										</p> -->
+<!-- 
+										<a href="#"><div class="demo01 expander">2022-II <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2022-II/CALENDARIO_ACADEMICO_2022-II.png" target="_blank">
+												<img src="imagenes/2022-II/CALENDARIO_ACADEMICO_2022-II.png" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2022-I FACSA <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I_FACSA_2.png" target="_blank">
+												<img src="imagenes/2022-I/CALENDARIO_ACADEMICO_2022-I_FACSA_2.png" width="100%" alt="">
+											</a>
+										</p> -->
+
+										<!-- <a href="#"><div class="demo01 expander">2022-II FACSA <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2022-II/CALENDARIO_ACADEMICO_2022-II_FACSA.png" target="_blank">
+												<img src="imagenes/2022-II/CALENDARIO_ACADEMICO_2022-II_FACSA.png" width="100%" alt="">
+											</a>
+										</p> -->
+<!-- 
+										<a href="#"><div class="demo01 expander">2022 INT FACSA <i class="fas fa-angle-left"></i></div></a>
+										<p class="text">
+											<a rel="prettyPhoto"  href="imagenes/2022-II/CALENDARIO_ACADEMICO_2022-INT_FACSA_2.png" target="_blank">
+												<img src="imagenes/2022-II/CALENDARIO_ACADEMICO_2022-INT_FACSA_2.png" width="100%" alt="">
+											</a>
+										</p> -->
+
+									</div>
+
+									<script>
+										$(document).ready(function () {
+											$('.text').hide();
+											$('.text:first').show();
+											$(".expander").on('click',function(){
+												var isVisible = $(this).parent('a').next('.text:visible').length;
+
+												if(isVisible == 1)
+												{
+													$(this).parent('a').next('.text').slideToggle();
+												}
+												else
+												{
+													$('.text:visible').slideToggle();
+													$(this).parent('a').next('.text').slideToggle();
+												}
+											})
+										});
+									</script>
+
+								</td>
+							</tr>
+
+						</table>
+
+					</td>
+
+					
+				</tr>
+
+			</table>
+
+		</td>
+	</tr>
+
+
+</table>
+<!-- <br> -->
+
+<table width="100%">
+	<tr>
+		<td colspan="2">&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<h4 style="color: #7D7C7C; margin-top: 4px; margin-bottom: 4px; font-size: 14px;">
+				BENEFICIOS
+
+				<hr class="style17" />
+			</h4>
+		</td>
+	</tr>
+
+	<tr>
+		<td width="50%" align="center">
+			<table width="70%" border="0" class="div_wifi">
+				<tbody>
+					<tr>
+						<td width="20%" align="center" rowspan="2" class="button_w2ifi"><a href="inicio.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy&wf=1"> <i class="fas fa-wifi" style="font-size: 70px; color: #102368;"></i> </a></td>
+						<td>
+							<a href="inicio.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy&wf=1"> <span style="font-size: 18px; color: #818181;"><strong>GENERAR CLAVE WIFI: </strong> </span></a>
+						</td>
+						<td><font style="font-size: 20px; color: #EE7700"><strong></strong></font></td>
+					</tr>
+					<tr>
+						<td>
+							<small>Procedimiento para acceder a UPT_WIFI &nbsp; </small>
+						</td>
+						<td><a href="https://net.upt.edu.pe/documentos/guia_acceso_WIFI.pdf" target="_blank" class="button_intranet"><i class="fas fa-download"></i> Descargar</a></td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+	<td width="50%" align="center">
+<br><br>			<!-- 		<img src='imagenes/boton_m.jpg' border="0" onmouseover='this.src="imagenes/boton_m1.jpg";' onmouseout='this.src="imagenes/boton_m.jpg";'  alt='' />
+					<img src='imagenes/printer.gif' border="0"  alt='Imprimir Ficha de Matricula' /> -->
+					<table width="70%" border="0" class="div_ficha">
+						<tbody>
+							<tr>
+								<td width="20%" align="center" rowspan="2" class="button_w2ifi"><a href="imprimir_matricula.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy&var=G@3YB2ANPwQzBTVfYQU/AGcDPVM2ATU=" target="_blank"> <i class="fas fa-print" style="font-size: 70px; color: #F4BA3D;"></i> </a></td>
+								<td>
+									<a href="imprimir_matricula.php?sesion=GtOzqrY9uZ47sXEDQz4ZSPuXA1mFSpy&var=G@3YB2ANPwQzBTVfYQU/AGcDPVM2ATU=" target="_blank"><span style="font-size: 18px; color: #818181;"><strong>FICHA DE MATR&Iacute;CULA </strong> </span></a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<small>
+										<strong>NOTA:</strong><br />
+										Esta opci&oacute;n estar&aacute; habilitada hasta la rectificaci&oacute;n de matr&iacute;cula.</small>
+								</td>
+							</tr>
+						</tbody>
+				</table>
+			</td>
+	</tr>
+</form>
+</div>
+</body>
+<!--<script src="tree.js" language="javascript" type="text/javascript"></script>-->
+<script language="JavaScript" >
+//startclock();
+function isEmailAddress(theElement, nombre_del_elemento, bolDominiosPermitidos )
+{
+	var s = theElement.value;
+
+	if(s !== ""){
+		if(bolDominiosPermitidos == true){
+			$validacion = fncEmailDominiosPermitidos(s);
+		}else{
+			$validacion = true;
+		}
+
+		if($validacion){
+			//var filter=/^[A-Za-z][A-Za-z0-9_]*@[A-Za-z0-9_]+\.[A-Za-z0-9_.]+[A-za-z]$/;
+			var filter=/^[A-Za-z][A-Za-z0-9._]*@[A-Za-z0-9_]+\.[A-Za-z0-9_.]+[A-za-z]$/;
+			<!-- if (s.length == 0 ) return true; -->
+			if (filter.test(s)){
+				return true;
+			}else{
+				alert("Ingrese una dirección de correo válida");
+				theElement.focus();
+				return false;
+			}
+		}else{
+			alert("No se encuentra dentro de los servidores y dominios permitidos!. Los unicos servidores y dominios permitidos son: \n - @upt.edu.pe \n - @upt.pe \n - @hotmail.com \n - @hotmail.es \n - @gmail.com \n - @gmail.es \n - @live.com");
+     	return false;
+		}
+	}else{
+		alert("Campo no puede estar vacio.");
+		theElement.focus();
+		return false;
+	}
+}
+</script>
+
+<script>
+
+	$(document).ready(function () {
+    $("#input_email").keydown(function (e) {
+      if (e.keyCode == 13) {
+ 				return false;
+      }
+    });
+  });
+</script>
+
+<script language="JavaScript" >
+	function sele(dc)
+	{
+		// email = document.frminicio.email.value;
+
+		// var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+		// if (! caract.test(email)){
+  //     alert("No es un correo válido!");
+  //     return false;
+  //   }else{
+
+			if(dc == 10){
+	    	if(confirm("Desea reenviar el código de validación al correo del usuario?"))
+				{
+			  	document.frminicio.op.value = dc;
+					document.frminicio.submit();
+				}
+			}
+
+    // }
+	}
+
+
+	function acceptNum(e)
+	{
+		var key = window.Event ? e.which : e.keyCode
+		return (key >= 48 && key <= 57)
+	}
+</script>
+
+<script src="funciones.js" language="javascript" type="text/javascript"></script>
+
+</html>
