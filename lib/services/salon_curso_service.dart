@@ -3,9 +3,6 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter/services.dart';
 import '../models/salon_curso.dart';
 
 class SalonCursoService {
@@ -15,11 +12,6 @@ class SalonCursoService {
   // Generar formato Excel para descarga
   Future<Map<String, dynamic>> descargarFormatoExcel() async {
     try {
-      // Solicitar permisos de almacenamiento
-      if (!await _solicitarPermisos()) {
-        print('⚠️ Continuando sin permisos - usando directorio interno');
-      }
-
       // Crear archivo Excel
       var excel = Excel.createExcel();
       Sheet sheet = excel['Asignacion_Salones'];
@@ -152,17 +144,29 @@ class SalonCursoService {
       // Guardar archivo
       List<int>? fileBytes = excel.save();
       if (fileBytes != null) {
-        String filePath = await _obtenerRutaDescarga();
+        // Usar FilePicker para que el usuario elija dónde guardar
+        String? filePath = await FilePicker.platform.saveFile(
+          dialogTitle: 'Guardar formato Excel',
+          fileName: 'formato_asignacion_salones.xlsx',
+          type: FileType.custom,
+          allowedExtensions: ['xlsx'],
+          bytes: Uint8List.fromList(fileBytes),
+        );
 
-        File file = File(filePath);
-        await file.writeAsBytes(fileBytes);
-
-        print('✅ Archivo Excel descargado: $filePath');
-        return {
-          'success': true,
-          'message': 'Formato Excel descargado exitosamente',
-          'filePath': filePath,
-        };
+        if (filePath != null) {
+          print('✅ Archivo Excel guardado: $filePath');
+          return {
+            'success': true,
+            'message': 'Formato Excel guardado exitosamente',
+            'filePath': filePath,
+          };
+        } else {
+          return {
+            'success': false,
+            'message': 'Guardado cancelado por el usuario',
+            'filePath': '',
+          };
+        }
       }
       return {
         'success': false,
@@ -475,43 +479,6 @@ class SalonCursoService {
         asignacionesPorDia: {},
         asignacionesPorSalon: {},
       );
-    }
-  }
-
-  // Solicitar permisos de almacenamiento
-  Future<bool> _solicitarPermisos() async {
-    if (Platform.isAndroid) {
-      // Solicitar múltiples permisos para diferentes versiones de Android
-      Map<Permission, PermissionStatus> statuses = await [
-        Permission.storage,
-        Permission.manageExternalStorage,
-      ].request();
-
-      bool storageGranted = statuses[Permission.storage]?.isGranted ?? false;
-      bool manageGranted =
-          statuses[Permission.manageExternalStorage]?.isGranted ?? false;
-
-      return storageGranted || manageGranted;
-    }
-    return true; // iOS maneja permisos automáticamente
-  }
-
-  // Obtener ruta para descargar archivo
-  Future<String> _obtenerRutaDescarga() async {
-    try {
-      // Intentar usar Downloads primero
-      final downloadsDir = Directory('/storage/emulated/0/Download');
-      if (await downloadsDir.exists()) {
-        return '${downloadsDir.path}/formato_asignacion_salones.xlsx';
-      }
-
-      // Usar directorio de documentos de la app
-      final appDir = await getApplicationDocumentsDirectory();
-      return '${appDir.path}/formato_asignacion_salones.xlsx';
-    } catch (e) {
-      // Fallback a directorio temporal
-      final tempDir = await getTemporaryDirectory();
-      return '${tempDir.path}/formato_asignacion_salones.xlsx';
     }
   }
 

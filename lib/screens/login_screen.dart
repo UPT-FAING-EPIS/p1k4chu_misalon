@@ -517,7 +517,7 @@ class AdminScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 8),
                           Text(
-                            'Panel de administración del sistema de horarios y ubicación de salones UPT',
+                            'Gestión inteligente de salones y horarios universitarios',
                             style: TextStyle(
                               fontSize: 16,
                               color: Color(0xFF64748B),
@@ -621,27 +621,27 @@ class AdminScreen extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
+                        color: Colors.blue.shade50,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.grey.shade200),
+                        border: Border.all(color: Colors.blue.shade200),
                       ),
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '🚀 Próximas Funciones',
+                            '✨ Sistema Activo',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF64748B),
+                              color: Color(0xFF1E40AF),
                             ),
                           ),
                           SizedBox(height: 8),
                           Text(
-                            '• Reportes de ocupación de salones\n• Configuración avanzada de aulas\n• Estadísticas de uso por periodo\n• Gestión de horarios especiales',
+                            '• Visualización en tiempo real de salones\n• Gestión Excel de asignaciones\n• Detección automática de cursos activos\n• Mapas interactivos del piso 3',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Color(0xFF64748B),
+                              color: Color(0xFF1E40AF),
                               height: 1.4,
                             ),
                           ),
