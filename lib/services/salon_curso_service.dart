@@ -542,12 +542,17 @@ class SalonCursoService {
       String diaActual = _obtenerDiaActual();
       List<SalonEstudiante> salonesEstudiante = [];
 
+      // Primero recopilar todos los salones
       for (String codigoCurso in codigosCursos) {
         QuerySnapshot snapshot = await _firestore
             .collection(collection)
             .where('codigoCurso', isEqualTo: codigoCurso.toUpperCase())
             .where('dia', isEqualTo: diaActual)
             .get();
+
+        print(
+          '🔍 Buscando: $codigoCurso en día $diaActual - Encontrados: ${snapshot.docs.length}',
+        );
 
         for (DocumentSnapshot doc in snapshot.docs) {
           SalonCurso asignacion = SalonCurso.fromFirestore(doc);
@@ -560,7 +565,7 @@ class SalonCursoService {
               horaInicio: asignacion.horaInicio,
               horaFin: asignacion.horaFin,
               dia: asignacion.dia,
-              esProximo: _esProximoCurso(asignacion.horaInicio),
+              esProximo: false, // Se calculará después
               esActual: _esCursoActual(
                 asignacion.horaInicio,
                 asignacion.horaFin,
@@ -568,6 +573,23 @@ class SalonCursoService {
             ),
           );
         }
+      }
+
+      // Calcular próximo curso después de tener todos
+      for (int i = 0; i < salonesEstudiante.length; i++) {
+        salonesEstudiante[i] = SalonEstudiante(
+          codigoSalon: salonesEstudiante[i].codigoSalon,
+          codigoCurso: salonesEstudiante[i].codigoCurso,
+          nombreCurso: salonesEstudiante[i].nombreCurso,
+          horaInicio: salonesEstudiante[i].horaInicio,
+          horaFin: salonesEstudiante[i].horaFin,
+          dia: salonesEstudiante[i].dia,
+          esProximo: _esProximoCurso(
+            salonesEstudiante[i].horaInicio,
+            salonesEstudiante,
+          ),
+          esActual: salonesEstudiante[i].esActual,
+        );
       }
 
       // Ordenar por hora de inicio
@@ -588,27 +610,46 @@ class SalonCursoService {
   String _obtenerDiaActual() {
     DateTime now = DateTime.now();
     List<String> diasSemana = [
-      'DOMINGO',
-      'LUNES',
-      'MARTES',
-      'MIÉRCOLES',
-      'JUEVES',
-      'VIERNES',
-      'SÁBADO',
+      'LUNES', // weekday = 1
+      'MARTES', // weekday = 2
+      'MIERCOLES', // weekday = 3 (sin tilde para coincidir con Excel)
+      'JUEVES', // weekday = 4
+      'VIERNES', // weekday = 5
+      'SABADO', // weekday = 6 (sin tilde)
+      'DOMINGO', // weekday = 7
     ];
-    return diasSemana[now.weekday % 7];
+    String dia = diasSemana[now.weekday - 1]; // weekday va de 1 a 7
+    print('📅 Día actual detectado: $dia (weekday: ${now.weekday})');
+    return dia;
   }
 
-  // Verificar si es el próximo curso (dentro de los próximos 30 minutos)
-  bool _esProximoCurso(String horaInicio) {
+  // Verificar si es el próximo curso (el siguiente curso del día)
+  bool _esProximoCurso(String horaInicio, List<SalonEstudiante> todosSalones) {
     try {
       DateTime now = DateTime.now();
       int horaActualMinutos = now.hour * 60 + now.minute;
       int horaInicioMinutos = _convertirHoraAMinutos(horaInicio);
 
-      // Próximo si falta entre 0 y 30 minutos
+      // Solo si el curso aún no ha empezado
+      if (horaInicioMinutos <= horaActualMinutos) {
+        return false;
+      }
+
+      // Buscar el curso más cercano
+      int menorDiferencia = 99999; // Un valor muy alto
+      for (var salon in todosSalones) {
+        int horaSalonMinutos = _convertirHoraAMinutos(salon.horaInicio);
+        if (horaSalonMinutos > horaActualMinutos) {
+          int diferencia = horaSalonMinutos - horaActualMinutos;
+          if (diferencia < menorDiferencia) {
+            menorDiferencia = diferencia;
+          }
+        }
+      }
+
+      // Es próximo solo si es el más cercano
       int diferencia = horaInicioMinutos - horaActualMinutos;
-      return diferencia > 0 && diferencia <= 30;
+      return diferencia == menorDiferencia;
     } catch (e) {
       return false;
     }
